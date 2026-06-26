@@ -9,74 +9,82 @@
 <style>
 :root {
   --bg: #101820;
-  --panel: #eef0f4;
   --floor: #c7c9d1;
   --ink: #172033;
-  --line: #6e7482;
   --open: #fff;
   --seated: #ffe08a;
   --food: #ffb45c;
-  --check: #8fd3ff;
   --dirty: #ff8f8f;
-  --hold: #c7f2c7;
   --toast: #f15b2a;
-  --dark: #121927;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: white; overflow: hidden; }
 button, input, select { font: inherit; }
 
-.app { height: 100vh; display: grid; grid-template-rows: 58px 1fr; background: linear-gradient(180deg, #111827, #0b1020); }
+.app { height: 100vh; display: grid; grid-template-rows: 54px 1fr; background: linear-gradient(180deg, #111827, #0b1020); }
 
 /* Top Bar */
 .topbar { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.12); background: #121927; }
-.brand { display: flex; align-items: center; gap: 10px; min-width: 245px; }
-.gator { width: 34px; height: 34px; border-radius: 9px; background: var(--toast); display: grid; place-items: center; font-weight: 900; font-size: 13px; }
-.brand h1 { font-size: 18px; line-height: 1; margin: 0; }
+.brand { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+.gator { width: 32px; height: 32px; border-radius: 9px; background: var(--toast); display: grid; place-items: center; font-weight: 900; font-size: 12px; }
+.brand h1 { font-size: 17px; line-height: 1; margin: 0; }
 .brand small { display: block; color: #b8c0d5; font-size: 11px; margin-top: 2px; }
 .stats { display: flex; gap: 8px; flex: 1; }
-.stat { background: #1d2638; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 6px 10px; min-width: 92px; }
-.stat b { display: block; font-size: 16px; }
+.stat { background: #1d2638; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 5px 10px; min-width: 88px; }
+.stat b { display: block; font-size: 15px; }
 .stat span { display: block; font-size: 10px; color: #aeb8ce; text-transform: uppercase; letter-spacing: .04em; }
-.btn { border: 0; border-radius: 11px; padding: 10px 12px; font-weight: 900; background: #2b3852; color: #fff; cursor: pointer; }
+.btn { border: 0; border-radius: 11px; padding: 9px 12px; font-weight: 900; background: #2b3852; color: #fff; cursor: pointer; }
 .btn.primary { background: var(--toast); }
-.btn:active, .miniBtn:active { transform: scale(.98); }
+.btn:active, .miniBtn:active { transform: scale(.97); }
 
 /* Main Layout */
-.main { display: grid; grid-template-columns: minmax(620px, 1fr) 360px; min-height: 0; }
+.main { display: grid; grid-template-columns: 1fr 340px; min-height: 0; }
 
 /* Floor */
-.floorWrap { padding: 12px; min-width: 0; overflow: hidden; }
-.floor { position: relative; width: 100%; height: 100%; min-height: 560px; background: var(--floor); border: 1px solid #8f95a2; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.25); overflow: hidden; }
-.floor::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 18%; background: #f3f4f6; border-top: 1px solid #9aa0ad; pointer-events: none; }
+.floorWrap { padding: 10px; min-width: 0; overflow: hidden; }
+.floor { position: relative; width: 100%; height: 100%; min-height: 560px; background: var(--floor); border: 1px solid #8f95a2; border-radius: 14px; box-shadow: 0 10px 36px rgba(0,0,0,.25); overflow: hidden; }
+.version { position: absolute; right: 8px; bottom: 6px; z-index: 2; color: #667085; font-size: 11px; font-weight: 900; }
 
-/* Labels */
-.label { position: absolute; border: 1px dashed #6e7482; background: rgba(255,255,255,.25); color: #263149; border-radius: 2px; display: grid; place-items: center; text-align: center; font-size: clamp(10px, 1.15vw, 14px); font-weight: 700; z-index: 1; }
-.front { top: 1.6%; left: 43%; width: 10%; height: 4.5%; }
-.host { top: 12%; left: 40.2%; width: 4.2%; height: 7.2%; }
-.bar { top: 43%; left: 40.2%; width: 19%; height: 18%; font-size: 16px; }
-.serverArea { top: 63.5%; left: 44%; width: 10%; height: 4.5%; }
-.kitchen { top: 70.5%; left: 44%; width: 10%; height: 4.5%; }
-.mens { top: 70.5%; left: 1%; width: 10%; height: 4.5%; }
-.ladies { top: 70.5%; right: 1%; width: 10%; height: 4.5%; }
-.togo { top: 65%; right: 1%; width: 10%; height: 4.5%; }
-.version { position: absolute; right: 10px; bottom: 8px; z-index: 2; color: #667085; font-size: 12px; font-weight: 900; }
+/* Bar shape */
+.barShape {
+  position: absolute;
+  top: 36%;
+  left: 35%;
+  width: 22%;
+  height: 22%;
+  border: 3px solid #8f95a2;
+  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  border-bottom: none;
+  background: rgba(255,255,255,.12);
+  z-index: 1;
+}
+.barLabel {
+  position: absolute;
+  top: 43%;
+  left: 43%;
+  color: #4a5060;
+  font-size: 14px;
+  font-weight: 800;
+  z-index: 1;
+}
 
 /* Tables */
-.table { position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 7px; background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.18); display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: 1; user-select: none; cursor: pointer; }
-.table .num { font-size: clamp(15px, 1.7vw, 22px); }
-.table .meta { font-size: clamp(8px, .85vw, 11px); font-weight: 800; margin-top: 4px; opacity: .85; }
+.table { position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 7px; background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.18); display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: 1; user-select: none; cursor: pointer; transition: transform .1s; }
+.table .num { font-size: clamp(13px, 1.5vw, 19px); }
+.table .meta { font-size: clamp(7px, .75vw, 10px); font-weight: 700; margin-top: 2px; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 2px; }
 .table.seated { background: var(--seated); }
 .table.food { background: var(--food); }
-.table.check { background: var(--check); }
 .table.dirty { background: var(--dirty); }
-.table.hold { background: var(--hold); }
-.table:active { transform: scale(.96); }
+.table:active { transform: scale(.94); }
 
-/* Table sizes and positions */
+/* Table sizes */
 .wide { width: 7.1%; height: 5.4%; }
 .small { width: 5.2%; height: 5.4%; }
 .rightSmall { width: 5.0%; height: 5.2%; }
+.sixTop { width: 8%; height: 5.8%; }
+.barSeat { width: 5.2%; height: 5.2%; }
+
+/* Left column */
 .leftCol { left: 1.0%; }
 .midCol { left: 11.0%; }
 .r1 { top: 1.6%; }
@@ -87,11 +95,15 @@ button, input, select { font: inherit; }
 .r6 { top: 42.2%; }
 .r7 { top: 49.4%; }
 .r8 { top: 56.6%; }
+
+/* Top row specials */
 .top20 { top: 1.6%; left: 11.0%; width: 3.5%; height: 5.2%; }
 .t30 { top: 1.6%; left: 31.2%; width: 7.2%; height: 5.4%; }
 .t50 { top: 1.6%; left: 61%; width: 7.2%; height: 5.4%; }
 .t60 { top: 1.6%; left: 73%; width: 5.2%; height: 5.4%; }
 .t70 { top: 1.6%; left: 82%; width: 7.2%; height: 5.4%; }
+
+/* Right columns */
 .rcol1 { left: 73%; }
 .rcol2 { left: 82%; }
 .rr2 { top: 8.8%; }
@@ -103,56 +115,77 @@ button, input, select { font: inherit; }
 .rr8 { top: 55.6%; }
 .rr9 { top: 62.8%; }
 
+/* Bar-adjacent tables: left side (31,32,33) */
+.bL1 { top: 37%; left: 25%; }
+.bL2 { top: 44%; left: 25%; }
+.bL3 { top: 51%; left: 25%; }
+
+/* Bar-adjacent tables: right side (51,52,53) */
+.bR1 { top: 37%; left: 62%; }
+.bR2 { top: 44%; left: 62%; }
+.bR3 { top: 51%; left: 62%; }
+
+/* Above bar: 6-tops (40,41,42) */
+.aboveBar1 { top: 27%; left: 32%; }
+.aboveBar2 { top: 27%; left: 42%; }
+.aboveBar3 { top: 27%; left: 52%; }
+
 /* Dashboard */
-.dashboard { border-left: 1px solid rgba(255,255,255,.1); background: #161f2f; padding: 12px; overflow-y: auto; }
-.card { background: #202b40; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 12px; margin-bottom: 12px; }
-.card h3 { margin: 0 0 10px; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
-.pill { background: #111827; border: 1px solid #334057; border-radius: 999px; padding: 5px 9px; color: #dbe5ff; font-size: 12px; }
-.row { display: grid; grid-template-columns: 1fr 80px; gap: 8px; margin-bottom: 8px; }
+.dashboard { border-left: 1px solid rgba(255,255,255,.1); background: #161f2f; padding: 10px; overflow-y: auto; }
+.card { background: #202b40; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
+.card h3 { margin: 0 0 8px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+.pill { background: #111827; border: 1px solid #334057; border-radius: 999px; padding: 4px 8px; color: #dbe5ff; font-size: 11px; }
+.row { display: grid; grid-template-columns: 1fr 70px; gap: 8px; margin-bottom: 8px; }
 .row.three { grid-template-columns: 1fr 70px 70px; }
-input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; background: #111827; color: white; padding: 10px; }
-.miniBtn { width: 100%; border: 0; border-radius: 10px; padding: 10px; background: #374761; color: white; font-weight: 900; cursor: pointer; }
+input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; background: #111827; color: white; padding: 10px; font-size: 15px; }
+.miniBtn { width: 100%; border: 0; border-radius: 10px; padding: 10px; background: #374761; color: white; font-weight: 900; cursor: pointer; font-size: 14px; }
 .miniBtn.orange { background: var(--toast); }
 .buttonRow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-.serverItem, .guest { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px; border-radius: 12px; background: #111827; margin-bottom: 8px; border: 1px solid #334057; }
+.serverItem, .guest { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px; border-radius: 12px; background: #111827; margin-bottom: 6px; border: 1px solid #334057; }
 .serverItem.next { border: 2px solid var(--toast); background: #172133; }
 .serverItem b, .guest b { font-size: 14px; }
-.serverItem small, .guest small { display: block; color: #aeb8ce; }
+.serverItem small, .guest small { display: block; color: #aeb8ce; font-size: 12px; }
 .itemBtns { display: flex; gap: 6px; }
 .itemBtns button, .guest button { border: 0; border-radius: 8px; background: #2d3b55; color: #fff; padding: 7px 9px; font-weight: 800; cursor: pointer; }
 .itemBtns .make { background: var(--toast); }
 
 /* Tabs */
-.tabs { display: flex; gap: 8px; margin-bottom: 10px; }
-.tab { flex: 1; border: 0; border-radius: 10px; padding: 10px 8px; background: #26344d; color: #dbe5ff; font-weight: 900; cursor: pointer; }
+.tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.tab { flex: 1; border: 0; border-radius: 10px; padding: 9px 6px; background: #26344d; color: #dbe5ff; font-weight: 900; cursor: pointer; font-size: 13px; }
 .tab.active { background: var(--toast); color: #fff; }
 
 /* Modal */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; align-items: center; justify-content: center; z-index: 10; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 10; }
 .modal.show { display: flex; }
-.sheet { width: min(440px, 92vw); background: #f7f8fb; color: #111827; border-radius: 20px; padding: 16px; box-shadow: 0 20px 70px rgba(0,0,0,.45); }
-.sheet h2 { margin: 0 0 12px; }
-.statusGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-.statusGrid button { border: 0; border-radius: 12px; padding: 13px; font-weight: 900; color: #111827; cursor: pointer; }
-.s-open { background: var(--open); border: 1px solid #ccc !important; }
-.s-seated { background: var(--seated); }
-.s-food { background: var(--food); }
-.s-check { background: var(--check); }
-.s-dirty { background: var(--dirty); }
-.s-hold { background: var(--hold); }
-.close { margin-top: 12px; background: #111827; color: white !important; width: 100%; }
+.sheet { width: min(480px, 94vw); background: #f7f8fb; color: #111827; border-radius: 20px; padding: 20px; box-shadow: 0 20px 70px rgba(0,0,0,.5); }
+.sheet h2 { margin: 0 0 16px; font-size: 22px; }
+.sheet .field { margin-bottom: 14px; }
+.sheet .field label { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 4px; }
+.sheet .field input,
+.sheet .field select { width: 100%; padding: 14px; font-size: 17px; border: 2px solid #ddd; border-radius: 12px; background: #fff; color: #111; }
+.sheet .field select { appearance: auto; }
+.sheet .field input:focus,
+.sheet .field select:focus { border-color: var(--toast); outline: none; }
+.sheet .actions { display: flex; gap: 10px; margin-top: 16px; }
+.sheet .actions button { flex: 1; padding: 14px; border: 0; border-radius: 12px; font-weight: 900; font-size: 16px; cursor: pointer; }
+.sheet .actions .cancel { background: #e5e7eb; color: #333; }
+.sheet .actions .seat { background: var(--toast); color: #fff; }
+
+/* Roster */
+.rosterItem { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: #111827; border: 1px solid #334057; border-radius: 10px; margin-bottom: 6px; }
+.rosterItem span { font-size: 14px; font-weight: 600; }
+.rosterItem button { border: 0; background: #ff4d4d; color: #fff; border-radius: 6px; padding: 5px 10px; font-weight: 800; cursor: pointer; font-size: 12px; }
 
 /* Responsive */
 @media (max-width: 980px) {
   .main { grid-template-columns: 1fr; }
-  .dashboard { position: fixed; right: 0; top: 58px; bottom: 0; width: min(380px, 96vw); transform: translateX(100%); transition: .2s; z-index: 7; }
+  .dashboard { position: fixed; right: 0; top: 54px; bottom: 0; width: min(360px, 94vw); transform: translateX(100%); transition: .2s; z-index: 7; }
   .dashboard.open { transform: none; }
   .stats { display: none; }
   .floorWrap { padding: 6px; }
   .floor { border-radius: 10px; }
-  .label { font-size: 10px; }
   .table .meta { display: none; }
-  .small, .wide, .rightSmall { height: 6.2%; }
+  .small, .wide, .rightSmall, .sixTop, .barSeat { height: 6%; }
 }
 </style>
 </head>
@@ -164,16 +197,16 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
     <div class="brand">
       <div class="gator">TG</div>
       <div>
-        <h1>Tail-Gators Host Stand</h1>
-        <small>Dining Room &bull; v9</small>
+        <h1>Tail-Gators Host</h1>
+        <small>v10</small>
       </div>
     </div>
     <div class="stats">
       <div class="stat"><b id="openCount">0</b><span>Open</span></div>
       <div class="stat"><b id="seatedCount">0</b><span>Seated</span></div>
       <div class="stat"><b id="waitCount">0</b><span>Waiting</span></div>
-      <div class="stat"><b id="resCount">0</b><span>Reservations</span></div>
-      <div class="stat"><b id="nextServerTop">&mdash;</b><span>Next Server</span></div>
+      <div class="stat"><b id="resCount">0</b><span>Res</span></div>
+      <div class="stat"><b id="nextServerTop">&mdash;</b><span>Next</span></div>
     </div>
     <button class="btn" id="resetBtn">Day</button>
     <button class="btn primary" id="togglePanel">Panel</button>
@@ -184,15 +217,9 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
     <!-- Floor Map -->
     <section class="floorWrap">
       <div class="floor" id="floor">
-        <div class="label front">Front Door</div>
-        <div class="label host">Host</div>
-        <div class="label bar">Bar</div>
-        <div class="label serverArea">Server Area</div>
-        <div class="label kitchen">Kitchen</div>
-        <div class="label mens">Men's Room</div>
-        <div class="label ladies">Ladies Room</div>
-        <div class="label togo">Togo &rarr;</div>
-        <div class="version">v9</div>
+        <div class="barShape"></div>
+        <div class="barLabel">BAR</div>
+        <div class="version">v10</div>
       </div>
     </section>
 
@@ -200,15 +227,15 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
     <aside class="dashboard" id="dashboard">
       <!-- Server Rotation Card -->
       <div class="card">
-        <h3>Server Rotation <span class="pill">Next: <b id="nextServerCard">&mdash;</b></span></h3>
+        <h3>Rotation <span class="pill">Next: <b id="nextServerCard">&mdash;</b></span></h3>
         <div class="row">
-          <input id="serverName" placeholder="Add server">
-          <button class="miniBtn orange" id="addServer">Add</button>
+          <select id="rosterPick"><option value="">Pick from roster</option></select>
+          <button class="miniBtn orange" id="addServerFromRoster">Add</button>
         </div>
         <div id="serverList"></div>
         <div class="buttonRow">
-          <button class="miniBtn" id="skipServer">Skip Next</button>
-          <button class="miniBtn" id="resetRotation">Reset Order</button>
+          <button class="miniBtn" id="skipServer">Skip</button>
+          <button class="miniBtn" id="resetRotation">Reset</button>
         </div>
       </div>
 
@@ -216,6 +243,7 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
       <div class="tabs">
         <button class="tab active" data-tab="wait">Waitlist</button>
         <button class="tab" data-tab="res">Reservations</button>
+        <button class="tab" data-tab="roster">Roster</button>
         <button class="tab" data-tab="day">Day</button>
       </div>
 
@@ -227,8 +255,8 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
             <input id="wName" placeholder="Name">
             <input id="wSize" type="number" min="1" placeholder="#">
           </div>
-          <input id="wNotes" placeholder="Notes" style="margin-top:8px">
-          <button class="miniBtn orange" id="addWait" style="margin-top:10px">Add to Waitlist</button>
+          <input id="wNotes" placeholder="Notes" style="margin-top:6px">
+          <button class="miniBtn orange" id="addWait" style="margin-top:8px">Add to Waitlist</button>
         </div>
         <div id="waitList"></div>
       </div>
@@ -242,10 +270,23 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
             <input id="rTime" placeholder="Time">
             <input id="rSize" type="number" min="1" placeholder="#">
           </div>
-          <input id="rNotes" placeholder="Notes" style="margin-top:8px">
-          <button class="miniBtn orange" id="addRes" style="margin-top:10px">Add Reservation</button>
+          <input id="rNotes" placeholder="Notes" style="margin-top:6px">
+          <button class="miniBtn orange" id="addRes" style="margin-top:8px">Add Reservation</button>
         </div>
         <div id="resList"></div>
+      </div>
+
+      <!-- Roster Panel -->
+      <div id="rosterPanel" style="display:none">
+        <div class="card">
+          <h3>Staff Roster</h3>
+          <div class="row">
+            <input id="rosterName" placeholder="Server name">
+            <button class="miniBtn orange" id="addRoster">Add</button>
+          </div>
+          <small style="color:#aeb8ce;display:block;margin-bottom:8px">Add your staff here. Pick from this list when adding to tonight's rotation.</small>
+          <div id="rosterList"></div>
+        </div>
       </div>
 
       <!-- Day Panel -->
@@ -255,48 +296,55 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
           <button class="miniBtn orange" id="exportShift">Export Shift CSV</button>
           <button class="miniBtn" id="resetDay" style="margin-top:8px">Export + Reset Day</button>
           <button class="miniBtn" id="clearNoExport" style="margin-top:8px">Reset Without Export</button>
-          <small style="color:#aeb8ce;display:block;line-height:1.35;margin-top:10px">Export downloads a CSV to this device. Reset clears tables, waitlist, and reservations, but keeps your server list.</small>
+          <small style="color:#aeb8ce;display:block;line-height:1.35;margin-top:10px">Export downloads a CSV. Reset clears tables, waitlist, and reservations but keeps your server rotation and roster.</small>
         </div>
         <div class="card">
           <h3>Shift Summary</h3>
-          <div id="shiftSummary" style="color:#dbe5ff;font-size:14px;line-height:1.5"></div>
+          <div id="shiftSummary" style="color:#dbe5ff;font-size:13px;line-height:1.5"></div>
         </div>
       </div>
     </aside>
   </main>
 </div>
 
-<!-- Table Status Modal -->
+<!-- Seat Table Modal (only shows when tapping an OPEN table) -->
 <div class="modal" id="modal">
   <div class="sheet">
     <h2 id="modalTitle">Table</h2>
-    <div class="row">
-      <input id="partySize" type="number" min="1" placeholder="Party size">
-      <select id="server"><option value="">Server</option></select>
+    <div class="field">
+      <label>Party Size</label>
+      <input id="partySize" type="number" min="1" placeholder="How many?">
     </div>
-    <input id="tableNotes" placeholder="Notes" style="margin-top:8px">
-    <div class="statusGrid" style="margin-top:12px">
-      <button class="s-open" data-status="open">Open</button>
-      <button class="s-seated" data-status="seated">Seat + Rotate</button>
-      <button class="s-food" data-status="food">Food</button>
-      <button class="s-check" data-status="check">Check</button>
-      <button class="s-dirty" data-status="dirty">Dirty</button>
-      <button class="s-hold" data-status="hold">Hold/Reserved</button>
+    <div class="field">
+      <label>Server</label>
+      <select id="serverSelect"><option value="">Assign server</option></select>
     </div>
-    <button class="btn close" id="closeModal">Close</button>
+    <div class="field">
+      <label>Notes</label>
+      <input id="tableNotes" placeholder="Optional notes">
+    </div>
+    <div class="actions">
+      <button class="cancel" id="closeModal">Cancel</button>
+      <button class="seat" id="seatTable">Seat</button>
+    </div>
   </div>
 </div>
 
 <script>
 // ===== TABLE DEFINITIONS =====
+// [id, cssClass]
 const tables = [
+  // Left wall column
   ['10','wide leftCol r1'],['11','small leftCol r2'],['12','small leftCol r3'],
   ['13','small leftCol r4'],['14','small leftCol r5'],['15','small leftCol r6'],
   ['16','small leftCol r7'],['17','small leftCol r8'],['18','small leftCol rr9'],
+  // Mid column
   ['20','top20'],['21','wide midCol r2'],['22','wide midCol r3'],
   ['23','small midCol r5'],['24','small midCol r6'],['25','small midCol r7'],
   ['26','small midCol r8'],['27','small midCol rr9'],
+  // Top row
   ['30','t30'],['50','t50'],['60','t60'],['70','t70'],
+  // Right columns
   ['61','rightSmall rcol1 rr2'],['62','rightSmall rcol1 rr3'],
   ['63','rightSmall rcol1 rr5'],['64','rightSmall rcol1 rr6'],
   ['65','rightSmall rcol1 rr7'],['66','rightSmall rcol1 rr8'],
@@ -304,18 +352,26 @@ const tables = [
   ['71','rightSmall rcol2 rr2'],['72','rightSmall rcol2 rr3'],
   ['73','rightSmall rcol2 rr4'],['74','rightSmall rcol2 rr5'],
   ['75','rightSmall rcol2 rr6'],['76','rightSmall rcol2 rr7'],
-  ['77','rightSmall rcol2 rr8'],['78','rightSmall rcol2 rr9']
+  ['77','rightSmall rcol2 rr8'],['78','rightSmall rcol2 rr9'],
+  // Bar left side (4-tops)
+  ['31','barSeat bL1'],['32','barSeat bL2'],['33','barSeat bL3'],
+  // Bar right side (4-tops)
+  ['51','barSeat bR1'],['52','barSeat bR2'],['53','barSeat bR3'],
+  // Above bar (6-tops)
+  ['40','sixTop aboveBar1'],['41','sixTop aboveBar2'],['42','sixTop aboveBar3']
 ];
 
-// ===== STATE MANAGEMENT =====
+// Status cycle: open -> seated -> food -> dirty -> open
+const STATUS_CYCLE = ['open', 'seated', 'food', 'dirty'];
+
+// ===== STATE =====
 function loadState() {
   try {
-    return JSON.parse(localStorage.getItem('tg-host-v9') || localStorage.getItem('tg-host-v8') || localStorage.getItem('tg-host-v7') || '{}');
+    return JSON.parse(localStorage.getItem('tg-host-v10') || localStorage.getItem('tg-host-v9') || localStorage.getItem('tg-host-v8') || '{}');
   } catch (e) { return {}; }
 }
-
 function saveState() {
-  try { localStorage.setItem('tg-host-v9', JSON.stringify(state)); } catch (e) {}
+  try { localStorage.setItem('tg-host-v10', JSON.stringify(state)); } catch (e) {}
 }
 
 let state = loadState();
@@ -323,177 +379,244 @@ state.tables = state.tables || {};
 state.wait = state.wait || [];
 state.res = state.res || [];
 state.servers = state.servers || [];
+state.roster = state.roster || [];
 state.rotationIndex = state.rotationIndex || 0;
 state.shiftLog = state.shiftLog || [];
 state.shiftStarted = state.shiftStarted || Date.now();
 
-let selected = null;
-
-// ===== DOM REFERENCES =====
+// ===== DOM =====
 const floor = document.getElementById('floor');
 const dashboard = document.getElementById('dashboard');
 const modal = document.getElementById('modal');
 
-// ===== UTILITY FUNCTIONS =====
+// ===== UTILITY =====
 function logEvent(action, detail) {
   state.shiftLog.push({ time: new Date().toLocaleString(), action, detail: detail || '' });
   if (state.shiftLog.length > 1500) state.shiftLog = state.shiftLog.slice(-1500);
 }
-
-function mins(t) { return t ? Math.floor((Date.now() - t) / 60000) : ''; }
-
+function mins(t) { return t ? Math.floor((Date.now() - t) / 60000) : 0; }
 function currentServer() {
   return state.servers.length ? state.servers[state.rotationIndex % state.servers.length] : '';
 }
-
 function advanceServer() {
   if (state.servers.length) state.rotationIndex = (state.rotationIndex + 1) % state.servers.length;
 }
+function save() { saveState(); updateAll(); }
 
-function setNext(i) {
-  if (state.servers.length) { state.rotationIndex = i; save(); }
+// ===== TABLE CLICK LOGIC =====
+// If table is OPEN -> show modal to assign server/party
+// If table is seated/food/dirty -> cycle to next status
+function handleTableClick(n) {
+  let t = state.tables[n];
+  if (!t || t.status === 'open') {
+    // Open table: show seat modal
+    openSeatModal(n);
+  } else {
+    // Cycle: seated -> food -> dirty -> open
+    let idx = STATUS_CYCLE.indexOf(t.status);
+    let nextIdx = (idx + 1) % STATUS_CYCLE.length;
+    let nextStatus = STATUS_CYCLE[nextIdx];
+
+    if (nextStatus === 'open') {
+      // Going back to open: unassign everything
+      logEvent('Table ' + n, 'cleared (was ' + t.status + ') | server: ' + (t.server || ''));
+      delete state.tables[n];
+    } else {
+      t.status = nextStatus;
+      logEvent('Table ' + n, nextStatus + ' | server: ' + (t.server || ''));
+    }
+    save();
+  }
 }
 
-function removeServer(i) {
-  state.servers.splice(i, 1);
-  if (state.rotationIndex >= state.servers.length) state.rotationIndex = 0;
-  save();
+function openSeatModal(n) {
+  document.getElementById('modalTitle').textContent = 'Table ' + n;
+  document.getElementById('partySize').value = '';
+  document.getElementById('tableNotes').value = '';
+  updateServerSelect();
+  // Pre-select next server in rotation
+  document.getElementById('serverSelect').value = currentServer() || '';
+  modal.dataset.table = n;
+  modal.classList.add('show');
 }
 
-// ===== RENDERING =====
-function updateServerDropdown() {
-  document.getElementById('server').innerHTML = '<option value="">Server</option>' +
+function updateServerSelect() {
+  let sel = document.getElementById('serverSelect');
+  sel.innerHTML = '<option value="">Assign server</option>' +
     state.servers.map(x => '<option value="' + x + '">' + x + '</option>').join('');
 }
 
+// Seat button in modal
+document.getElementById('seatTable').onclick = () => {
+  let n = modal.dataset.table;
+  let party = document.getElementById('partySize').value;
+  let server = document.getElementById('serverSelect').value;
+  let notes = document.getElementById('tableNotes').value;
+
+  state.tables[n] = {
+    status: 'seated',
+    party,
+    server,
+    notes,
+    started: Date.now()
+  };
+
+  logEvent('Table ' + n, 'seated | server: ' + (server || '') + ' | party: ' + (party || '') + ' | notes: ' + (notes || ''));
+
+  // Advance rotation if this server was next
+  if (server && server === currentServer()) advanceServer();
+
+  modal.classList.remove('show');
+  save();
+};
+
+document.getElementById('closeModal').onclick = () => modal.classList.remove('show');
+modal.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
+
+// ===== RENDERING =====
 function drawTables() {
   tables.forEach(([n, cls]) => {
     let d = document.createElement('div');
     d.className = 'table ' + cls;
     d.dataset.table = n;
     d.innerHTML = '<div class="num">' + n + '</div><div class="meta"></div>';
-    d.onclick = () => openTable(n);
+    d.onclick = () => handleTableClick(n);
     floor.appendChild(d);
   });
-  renderTables();
 }
 
 function renderTables() {
   document.querySelectorAll('.table').forEach(el => {
     let n = el.dataset.table;
     let s = state.tables[n] || { status: 'open' };
-    el.classList.remove('seated', 'food', 'check', 'dirty', 'hold');
+    el.classList.remove('seated', 'food', 'dirty');
     if (s.status && s.status !== 'open') el.classList.add(s.status);
-    let meta = [];
-    if (s.server) meta.push(s.server);
-    if (s.party) meta.push(s.party + ' top');
-    if (s.started && s.status !== 'open') meta.push(mins(s.started) + 'm');
-    el.querySelector('.meta').textContent = meta.join(' \u2022 ');
+    // Only show server name on the table
+    el.querySelector('.meta').textContent = s.server || '';
   });
 }
 
 function renderServers() {
   const list = document.getElementById('serverList');
   list.innerHTML = state.servers.map((name, i) =>
-    '<div class="serverItem ' + (i === state.rotationIndex ? 'next' : '') + '">' +
-      '<div><b>' + (i === state.rotationIndex ? '\u27A1 ' : '') + name + '</b>' +
-      '<small>' + (i === state.rotationIndex ? 'Next up' : 'Tap Make Next to change rotation') + '</small></div>' +
+    '<div class="serverItem ' + (i === state.rotationIndex % state.servers.length ? 'next' : '') + '">' +
+      '<div><b>' + (i === state.rotationIndex % state.servers.length ? '\u27A1 ' : '') + name + '</b>' +
+      '<small>' + (i === state.rotationIndex % state.servers.length ? 'Next up' : '') + '</small></div>' +
       '<div class="itemBtns">' +
-        '<button class="make" onclick="setNext(' + i + ')">Make Next</button>' +
-        '<button onclick="removeServer(' + i + ')">X</button>' +
+        '<button class="make" onclick="setNext(' + i + ')">Next</button>' +
+        '<button onclick="removeFromRotation(' + i + ')">X</button>' +
       '</div>' +
     '</div>'
-  ).join('') || '<div class="card">No servers added yet.</div>';
+  ).join('') || '<div style="color:#aeb8ce;font-size:13px;padding:8px">No servers on rotation. Add from roster above.</div>';
+}
+
+function renderRoster() {
+  const list = document.getElementById('rosterList');
+  list.innerHTML = state.roster.map((name, i) =>
+    '<div class="rosterItem"><span>' + name + '</span><button onclick="removeFromRoster(' + i + ')">Remove</button></div>'
+  ).join('') || '<div style="color:#aeb8ce;font-size:13px">No staff added yet.</div>';
+
+  // Update roster picker dropdown
+  let pick = document.getElementById('rosterPick');
+  pick.innerHTML = '<option value="">Pick from roster</option>' +
+    state.roster.filter(n => !state.servers.includes(n)).map(n => '<option value="' + n + '">' + n + '</option>').join('');
 }
 
 function renderLists() {
-  const waitList = document.getElementById('waitList');
-  const resList = document.getElementById('resList');
-  const shiftSummary = document.getElementById('shiftSummary');
-
-  waitList.innerHTML = state.wait.map((g, i) =>
+  document.getElementById('waitList').innerHTML = state.wait.map((g, i) =>
     '<div class="guest"><div><b>' + g.name + (g.size ? ' \u2022 ' + g.size : '') + '</b>' +
-    '<small>' + mins(g.created) + 'm waiting' + (g.notes ? ' \u2022 ' + g.notes : '') + '</small></div>' +
-    '<button onclick="doneWait(' + i + ')">Done</button></div>'
-  ).join('') || '<div class="card">No one waiting.</div>';
+    '<small>' + mins(g.created) + 'm' + (g.notes ? ' \u2022 ' + g.notes : '') + '</small></div>' +
+    '<button onclick="doneWait(' + i + ')">Seat</button></div>'
+  ).join('') || '<div style="color:#aeb8ce;font-size:13px;padding:8px">No one waiting.</div>';
 
-  resList.innerHTML = state.res.map((g, i) =>
-    '<div class="guest"><div><b>' + (g.time || 'Time?') + ' \u2022 ' + g.name + (g.size ? ' \u2022 ' + g.size : '') + '</b>' +
+  document.getElementById('resList').innerHTML = state.res.map((g, i) =>
+    '<div class="guest"><div><b>' + (g.time || '?') + ' \u2022 ' + g.name + (g.size ? ' \u2022 ' + g.size : '') + '</b>' +
     '<small>' + (g.notes || '') + '</small></div>' +
     '<button onclick="doneRes(' + i + ')">Done</button></div>'
-  ).join('') || '<div class="card">No reservations.</div>';
+  ).join('') || '<div style="color:#aeb8ce;font-size:13px;padding:8px">No reservations.</div>';
 
-  if (shiftSummary) {
-    shiftSummary.innerHTML =
-      'Started: ' + new Date(state.shiftStarted).toLocaleString() + '<br>' +
-      'Events logged: ' + state.shiftLog.length + '<br>' +
+  let sum = document.getElementById('shiftSummary');
+  if (sum) {
+    sum.innerHTML = 'Started: ' + new Date(state.shiftStarted).toLocaleString() + '<br>' +
+      'Events: ' + state.shiftLog.length + '<br>' +
       'Active tables: ' + Object.keys(state.tables).length + '<br>' +
-      'Servers: ' + state.servers.join(', ');
+      'Servers tonight: ' + state.servers.join(', ');
   }
 }
 
 function updateCounts() {
   let vals = Object.values(state.tables);
   document.getElementById('openCount').textContent = tables.length - vals.filter(x => x.status && x.status !== 'open').length;
-  document.getElementById('seatedCount').textContent = vals.filter(x => ['seated', 'food', 'check'].includes(x.status)).length;
+  document.getElementById('seatedCount').textContent = vals.filter(x => ['seated', 'food'].includes(x.status)).length;
   document.getElementById('waitCount').textContent = state.wait.length;
   document.getElementById('resCount').textContent = state.res.length;
   document.getElementById('nextServerTop').textContent = currentServer() || '\u2014';
   document.getElementById('nextServerCard').textContent = currentServer() || '\u2014';
-  updateServerDropdown();
+}
+
+function updateAll() {
+  updateCounts();
   renderTables();
   renderServers();
+  renderRoster();
   renderLists();
 }
 
-function save() { saveState(); updateCounts(); }
-
-// ===== TABLE MODAL =====
-function openTable(n) {
-  selected = n;
-  let s = state.tables[n] || { status: 'open' };
-  document.getElementById('modalTitle').textContent = 'Table ' + n;
-  document.getElementById('partySize').value = s.party || '';
-  updateServerDropdown();
-  document.getElementById('server').value = s.server || currentServer() || '';
-  document.getElementById('tableNotes').value = s.notes || '';
-  modal.classList.add('show');
+// ===== SERVER ROTATION =====
+function setNext(i) { state.rotationIndex = i; save(); }
+function removeFromRotation(i) {
+  state.servers.splice(i, 1);
+  if (state.rotationIndex >= state.servers.length) state.rotationIndex = 0;
+  save();
 }
 
-document.querySelectorAll('[data-status]').forEach(b => {
-  b.onclick = () => {
-    if (!selected) return;
-    let old = state.tables[selected] || {};
-    let status = b.dataset.status;
-    let picked = document.getElementById('server').value;
-    let party = document.getElementById('partySize').value;
-    let notes = document.getElementById('tableNotes').value;
-
-    state.tables[selected] = {
-      status,
-      party,
-      server: picked,
-      notes,
-      started: (status === 'open' || status === 'dirty') ? null : (old.started || Date.now())
-    };
-
-    logEvent('Table ' + selected, status + ' | server: ' + (picked || '') + ' | party: ' + (party || '') + ' | notes: ' + (notes || ''));
-
-    if (status === 'seated' && old.status !== 'seated' && picked && picked === currentServer()) {
-      advanceServer();
-    }
-
-    if (status === 'open') delete state.tables[selected];
-    modal.classList.remove('show');
+document.getElementById('addServerFromRoster').onclick = () => {
+  let pick = document.getElementById('rosterPick');
+  let name = pick.value;
+  if (name && !state.servers.includes(name)) {
+    state.servers.push(name);
+    logEvent('Server Add', name);
+    pick.value = '';
     save();
-  };
+  }
+};
+
+document.getElementById('skipServer').onclick = () => {
+  logEvent('Rotation Skip', 'Skipped ' + (currentServer() || ''));
+  advanceServer();
+  save();
+};
+document.getElementById('resetRotation').onclick = () => {
+  state.rotationIndex = 0;
+  logEvent('Rotation Reset', '');
+  save();
+};
+
+// ===== ROSTER =====
+document.getElementById('addRoster').onclick = () => {
+  let input = document.getElementById('rosterName');
+  let name = input.value.trim();
+  if (name && !state.roster.includes(name)) {
+    state.roster.push(name);
+    input.value = '';
+    save();
+  }
+};
+document.getElementById('rosterName').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('addRoster').click();
 });
 
-document.getElementById('closeModal').onclick = () => modal.classList.remove('show');
-modal.onclick = e => { if (e.target.id === 'modal') modal.classList.remove('show'); };
+function removeFromRoster(i) {
+  let name = state.roster[i];
+  state.roster.splice(i, 1);
+  // Also remove from tonight's rotation if present
+  let si = state.servers.indexOf(name);
+  if (si !== -1) { state.servers.splice(si, 1); if (state.rotationIndex >= state.servers.length) state.rotationIndex = 0; }
+  save();
+}
 
 // ===== WAITLIST & RESERVATIONS =====
-function addWait() {
+document.getElementById('addWait').onclick = () => {
   let name = document.getElementById('wName').value.trim();
   let size = document.getElementById('wSize').value;
   let notes = document.getElementById('wNotes').value.trim();
@@ -504,39 +627,35 @@ function addWait() {
   document.getElementById('wSize').value = '';
   document.getElementById('wNotes').value = '';
   save();
-}
+};
 
-function addRes() {
+document.getElementById('addRes').onclick = () => {
   let name = document.getElementById('rName').value.trim();
   let time = document.getElementById('rTime').value.trim();
   let size = document.getElementById('rSize').value;
   let notes = document.getElementById('rNotes').value.trim();
   if (!name) return;
   state.res.push({ name, time, size, notes, created: Date.now() });
-  logEvent('Reservation Add', (time || '') + ' | ' + name + (size ? ' | ' + size : ''));
+  logEvent('Reservation Add', (time || '') + ' | ' + name);
   document.getElementById('rName').value = '';
   document.getElementById('rTime').value = '';
   document.getElementById('rSize').value = '';
   document.getElementById('rNotes').value = '';
   save();
-}
+};
 
 function doneWait(i) {
   let g = state.wait[i];
-  if (g) logEvent('Waitlist Done', g.name + ' | waited: ' + mins(g.created) + 'm');
+  if (g) logEvent('Waitlist Done', g.name + ' | ' + mins(g.created) + 'm');
   state.wait.splice(i, 1);
   save();
 }
-
 function doneRes(i) {
   let g = state.res[i];
   if (g) logEvent('Reservation Done', (g.time || '') + ' | ' + g.name);
   state.res.splice(i, 1);
   save();
 }
-
-document.getElementById('addWait').onclick = addWait;
-document.getElementById('addRes').onclick = addRes;
 
 // ===== TABS =====
 document.querySelectorAll('.tab').forEach(t => {
@@ -545,42 +664,13 @@ document.querySelectorAll('.tab').forEach(t => {
     t.classList.add('active');
     document.getElementById('waitPanel').style.display = t.dataset.tab === 'wait' ? 'block' : 'none';
     document.getElementById('resPanel').style.display = t.dataset.tab === 'res' ? 'block' : 'none';
+    document.getElementById('rosterPanel').style.display = t.dataset.tab === 'roster' ? 'block' : 'none';
     document.getElementById('dayPanel').style.display = t.dataset.tab === 'day' ? 'block' : 'none';
   };
 });
 
-// ===== SERVER ROTATION =====
-document.getElementById('addServer').onclick = () => {
-  let n = document.getElementById('serverName').value.trim();
-  if (n && !state.servers.includes(n)) {
-    state.servers.push(n);
-    logEvent('Server Add', n);
-    document.getElementById('serverName').value = '';
-    save();
-  }
-};
-
-document.getElementById('serverName').addEventListener('keydown', e => {
-  if (e.key === 'Enter') document.getElementById('addServer').click();
-});
-
-document.getElementById('skipServer').onclick = () => {
-  logEvent('Rotation Skip', 'Skipped ' + (currentServer() || ''));
-  advanceServer();
-  save();
-};
-
-document.getElementById('resetRotation').onclick = () => {
-  state.rotationIndex = 0;
-  logEvent('Rotation Reset', 'Next is ' + (currentServer() || ''));
-  save();
-};
-
 // ===== EXPORT & RESET =====
-function csvSafe(v) {
-  v = String(v ?? '');
-  return '"' + v.replace(/"/g, '""') + '"';
-}
+function csvSafe(v) { v = String(v ?? ''); return '"' + v.replace(/"/g, '""') + '"'; }
 
 function exportCsv() {
   let rows = [
@@ -590,7 +680,7 @@ function exportCsv() {
   ];
   state.shiftLog.forEach(e => rows.push([e.time, e.action, e.detail]));
   rows.push([]);
-  rows.push(['Current Table', 'Status', 'Server', 'Party', 'Notes', 'Minutes']);
+  rows.push(['Table', 'Status', 'Server', 'Party', 'Notes', 'Minutes']);
   Object.keys(state.tables).sort((a, b) => Number(a) - Number(b)).forEach(n => {
     let t = state.tables[n];
     rows.push([n, t.status || '', t.server || '', t.party || '', t.notes || '', t.started ? mins(t.started) : '']);
@@ -608,17 +698,18 @@ function exportCsv() {
 function resetDayNow(doExport) {
   if (doExport) exportCsv();
   let keepServers = state.servers.slice();
-  state = { tables: {}, wait: [], res: [], servers: keepServers, rotationIndex: 0, shiftLog: [], shiftStarted: Date.now() };
+  let keepRoster = state.roster.slice();
+  state = { tables: {}, wait: [], res: [], servers: keepServers, roster: keepRoster, rotationIndex: 0, shiftLog: [], shiftStarted: Date.now() };
   logEvent('Shift Started', 'New day/shift reset');
   save();
 }
 
 document.getElementById('exportShift').onclick = () => exportCsv();
 document.getElementById('resetDay').onclick = () => {
-  if (confirm('Export this shift and reset tables/waitlist/reservations? Server list stays.')) resetDayNow(true);
+  if (confirm('Export this shift and reset? Server list and roster stay.')) resetDayNow(true);
 };
 document.getElementById('clearNoExport').onclick = () => {
-  if (confirm('Reset without exporting? Server list stays.')) resetDayNow(false);
+  if (confirm('Reset without exporting? Server list and roster stay.')) resetDayNow(false);
 };
 
 // ===== PANEL TOGGLE =====
@@ -629,13 +720,13 @@ document.getElementById('resetBtn').onclick = () => {
 };
 
 // ===== INIT =====
-setInterval(updateCounts, 30000);
 drawTables();
-updateCounts();
+updateAll();
+setInterval(() => { renderTables(); renderLists(); updateCounts(); }, 30000);
 
 // Service Worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js?v=9').catch(() => {});
+  navigator.serviceWorker.register('sw.js?v=10').catch(() => {});
 }
 </script>
 </body>
