@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#101820" />
+<title>Tail-Gators SLW | Reservations</title>
+<style>
+:root {
+  --bg: #101820;
+  --toast: #f15b2a;
+  --ink: #172033;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+.card { background: #161f2f; border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 30px; width: 100%; max-width: 440px; box-shadow: 0 20px 60px rgba(0,0,0,.5); text-align: center; }
+.logo { width: 60px; height: 60px; background: var(--toast); border-radius: 16px; display: grid; place-items: center; font-weight: 900; font-size: 22px; margin: 0 auto 15px; }
+h1 { font-size: 24px; margin: 0 0 5px; }
+p { color: #aeb8ce; margin: 0 0 25px; font-size: 15px; }
+.field { text-align: left; margin-bottom: 15px; }
+label { display: block; font-size: 13px; font-weight: 700; color: #aeb8ce; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .05em; }
+input, select, textarea { width: 100%; padding: 14px; font-size: 16px; border: 2px solid #2b3852; border-radius: 12px; background: #0b1020; color: white; outline: none; }
+input:focus { border-color: var(--toast); }
+.btn { width: 100%; padding: 16px; background: var(--toast); color: white; border: 0; border-radius: 12px; font-weight: 900; font-size: 18px; cursor: pointer; margin-top: 10px; }
+.btn:active { transform: scale(.98); }
+.success { display: none; }
+.success h2 { color: #66d97f; }
+</style>
+</head>
+<body>
+
+<div class="card" id="formCard">
+  <div class="logo">TG</div>
+  <h1>Tail-Gators SLW</h1>
+  <p>Request a Reservation</p>
+  
+  <div class="field">
+    <label>Your Name</label>
+    <input id="name" placeholder="Full Name">
+  </div>
+  
+  <div class="field" style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+    <div>
+      <label>Time</label>
+      <input id="time" type="time">
+    </div>
+    <div>
+      <label>Party Size</label>
+      <input id="size" type="number" min="1" value="2">
+    </div>
+  </div>
+  
+  <div class="field">
+    <label>Notes (Allergies, Birthdays, etc.)</label>
+    <textarea id="notes" rows="2"></textarea>
+  </div>
+  
+  <button class="btn" id="submitBtn">Submit Request</button>
+</div>
+
+<div class="card success" id="successCard">
+  <div class="logo" style="background:#66d97f">✓</div>
+  <h2>Request Sent!</h2>
+  <p>We've received your reservation request. We'll see you then!</p>
+  <button class="btn" onclick="location.reload()">Make another</button>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDvSiFuIrhvh7vg_iYJHSIJjbG9JiXRkOU",
+  authDomain: "tailgators-west-seating.firebaseapp.com",
+  databaseURL: "https://tailgators-west-seating-default-rtdb.firebaseio.com",
+  projectId: "tailgators-west-seating",
+  storageBucket: "tailgators-west-seating.firebasestorage.app",
+  messagingSenderId: "889514250602",
+  appId: "1:889514250602:web:9db3b6b28bea6af4ba1513"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+document.getElementById('submitBtn').onclick = function() {
+  const name = document.getElementById('name').value;
+  const time = document.getElementById('time').value;
+  const size = document.getElementById('size').value;
+  const notes = document.getElementById('notes').value;
+  
+  if (!name || !time) {
+    alert('Please enter your name and time.');
+    return;
+  }
+
+  // Push to reservations list in Firebase
+  db.ref('tailgators/res').once('value').then(snap => {
+    let resList = snap.val() || [];
+    // Convert 24h to 12h for host app display
+    let [h, m] = time.split(':');
+    let ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    let timeStr = h + ':' + m + ' ' + ampm;
+
+    resList.push({
+      name: name,
+      time: timeStr,
+      size: size,
+      notes: notes,
+      created: Date.now()
+    });
+    
+    db.ref('tailgators/res').set(resList).then(() => {
+      document.getElementById('formCard').style.display = 'none';
+      document.getElementById('successCard').style.display = 'block';
+    });
+  });
+};
+</script>
+
+</body>
+</html>

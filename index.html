@@ -18,7 +18,7 @@
   --toast: #f15b2a;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: white; overflow: hidden; }
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: white; overflow: hidden; }
 button, input, select { font: inherit; }
 
 .app { height: 100vh; display: grid; grid-template-rows: 50px 1fr; background: linear-gradient(180deg, #111827, #0b1020); }
@@ -36,106 +36,90 @@ button, input, select { font: inherit; }
 .btn.primary { background: var(--toast); }
 .btn:active { transform: scale(.97); }
 
-/* Floor - Full Screen */
+/* Floor */
 .floorWrap { padding: 8px; overflow: hidden; position: relative; }
 .floor { position: relative; width: 100%; height: 100%; background: var(--floor); border: 1px solid #8f95a2; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.25); overflow: hidden; }
 .version { position: absolute; right: 8px; bottom: 6px; z-index: 2; color: #667085; font-size: 10px; font-weight: 900; }
 
-/* Bar shape */
 .barShape {
-  position: absolute;
-  top: 36%;
-  left: 35%;
-  width: 22%;
-  height: 22%;
-  border: 3px solid #8f95a2;
-  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
-  border-bottom: none;
-  background: rgba(255,255,255,.1);
-  z-index: 1;
+  position: absolute; top: 36%; left: 35%; width: 22%; height: 22%; border: 3px solid #8f95a2;
+  border-radius: 50% 50% 0 0 / 60% 60% 0 0; border-bottom: none; background: rgba(255,255,255,.1); z-index: 1;
 }
-.barLabel {
-  position: absolute;
-  top: 44%;
-  left: 44%;
-  color: #4a5060;
-  font-size: 13px;
-  font-weight: 800;
-  z-index: 1;
-}
+.barLabel { position: absolute; top: 44%; left: 44%; color: #4a5060; font-size: 13px; font-weight: 800; z-index: 1; }
 
 /* Tables */
-.table { position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 7px; background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.15); display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: 1; user-select: none; cursor: pointer; transition: transform .1s; padding: 2px; touch-action: manipulation; -webkit-touch-callout: none; }
-.table .num { font-size: clamp(11px, 1.3vw, 16px); }
-.table .server-name { font-size: clamp(7px, .65vw, 9px); font-weight: 700; margin-top: 1px; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 1px; }
-.table .badges { position: absolute; bottom: 1px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 3px; font-size: clamp(7px, .55vw, 9px); font-weight: 700; opacity: .9; }
-.table .badges .time-badge { }
-.table .badges .party-badge { }
+.table { 
+  position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 8px; 
+  background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.15); 
+  display: flex; flex-direction: column; align-items: center; justify-content: center; 
+  font-weight: 900; line-height: 1; user-select: none; cursor: pointer; 
+  transition: transform .1s; padding: 2px; touch-action: manipulation; 
+  -webkit-touch-callout: none;
+}
+.table .num { font-size: clamp(14px, 1.8vw, 22px); }
+.table .server-name { font-size: clamp(9px, 0.9vw, 12px); font-weight: 700; margin-top: 2px; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; }
+.table .badges { position: absolute; bottom: 2px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 4px; font-size: clamp(8px, 0.7vw, 11px); font-weight: 700; opacity: .9; }
+
 .table.seated { background: var(--seated); }
 .table.food { background: var(--food); }
 .table.dirty { background: var(--dirty); color: #fff; }
+.table.dirty.pulse { animation: pulse-dirty 1.5s infinite; }
+@keyframes pulse-dirty { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 .table:active { transform: scale(.93); }
 
-/* Table sizes */
-.sixTop { width: 7.5%; height: 6%; }
-.wide { width: 7%; height: 5.8%; }
-.small { width: 5.5%; height: 5.5%; }
-.rightSmall { width: 5.2%; height: 5.3%; }
-.barSeat { width: 5.2%; height: 5.3%; }
+/* Table sizes (V12 Bigger) */
+.sixTop { width: 9%; height: 8%; }
+.wide { width: 8.5%; height: 7.5%; }
+.small { width: 7%; height: 7%; }
+.rightSmall { width: 6.5%; height: 6.8%; }
+.barSeat { width: 6.5%; height: 6.8%; }
 
-/* Left column */
+/* Layout Grid */
 .leftCol { left: 1%; }
-.midCol { left: 10.5%; }
+.midCol { left: 12%; }
 .r1 { top: 2%; }
-.r2 { top: 9.5%; }
-.r3 { top: 17%; }
-.r4 { top: 24.5%; }
-.r5 { top: 36%; }
-.r6 { top: 43%; }
-.r7 { top: 50%; }
-.r8 { top: 57%; }
-.r9 { top: 64%; }
+.r2 { top: 11%; }
+.r3 { top: 20%; }
+.r4 { top: 29%; }
+.r5 { top: 42%; }
+.r6 { top: 51%; }
+.r7 { top: 60%; }
+.r8 { top: 69%; }
+.r9 { top: 78%; }
 
-/* Top row */
-.top20 { top: 2%; left: 10.5%; width: 7.5%; height: 6%; }
-.t30 { top: 2%; left: 28%; width: 7.5%; height: 6%; }
-.t50 { top: 2%; left: 58%; width: 7.5%; height: 6%; }
-.t60 { top: 2%; left: 70%; width: 5.2%; height: 5.3%; }
-.t70 { top: 2%; left: 79%; width: 7.5%; height: 6%; }
+.top20 { top: 2%; left: 12%; }
+.t30 { top: 2%; left: 30%; }
+.t50 { top: 2%; left: 58%; }
+.t60 { top: 2%; left: 71%; }
+.t70 { top: 2%; left: 82%; }
 
-/* Right columns */
-.rcol1 { left: 70%; }
-.rcol2 { left: 79%; }
-.rr2 { top: 9.5%; }
-.rr3 { top: 17%; }
-.rr4 { top: 24.5%; }
-.rr5 { top: 33%; }
-.rr6 { top: 40%; }
-.rr7 { top: 47%; }
-.rr8 { top: 54%; }
-.rr9 { top: 61%; }
+.rcol1 { left: 71%; }
+.rcol2 { left: 82%; }
+.rr2 { top: 11%; }
+.rr3 { top: 20%; }
+.rr4 { top: 29%; }
+.rr5 { top: 40%; }
+.rr6 { top: 49%; }
+.rr7 { top: 58%; }
+.rr8 { top: 67%; }
+.rr9 { top: 76%; }
 
-/* Bar left (31,32,33) */
-.bL1 { top: 38%; left: 24%; }
-.bL2 { top: 45%; left: 24%; }
-.bL3 { top: 52%; left: 24%; }
-
-/* Bar right (51,52,53) */
-.bR1 { top: 38%; left: 62%; }
-.bR2 { top: 45%; left: 62%; }
-.bR3 { top: 52%; left: 62%; }
-
-/* Above bar 6-tops (40,41,42) */
-.aboveBar1 { top: 28%; left: 31%; }
-.aboveBar2 { top: 28%; left: 41%; }
-.aboveBar3 { top: 28%; left: 51%; }
+.bL1 { top: 42%; left: 26%; }
+.bL2 { top: 51%; left: 26%; }
+.bL3 { top: 60%; left: 26%; }
+.bR1 { top: 42%; left: 62%; }
+.bR2 { top: 51%; left: 62%; }
+.bR3 { top: 60%; left: 62%; }
+.aboveBar1 { top: 31%; left: 32%; }
+.aboveBar2 { top: 31%; left: 42%; }
+.aboveBar3 { top: 31%; left: 52%; }
 
 /* Legend */
 .legend { position: absolute; bottom: 14px; left: 14px; display: flex; gap: 20px; z-index: 4; background: rgba(255,255,255,.85); padding: 10px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
 .legend-item { display: flex; align-items: center; gap: 8px; font-size: 15px; color: #222; font-weight: 800; }
 .legend-dot { width: 22px; height: 22px; border-radius: 5px; border: 2px solid #666; }
 
-/* Slide-out Panel */
+/* Panel */
 .panel-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 8; display: none; }
 .panel-overlay.show { display: block; }
 .panel { position: fixed; right: 0; top: 0; bottom: 0; width: min(380px, 90vw); background: #161f2f; z-index: 9; transform: translateX(100%); transition: transform .25s ease; overflow-y: auto; padding: 14px; padding-top: 60px; }
@@ -145,29 +129,12 @@ button, input, select { font: inherit; }
 .card { background: #202b40; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
 .card h3 { margin: 0 0 8px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
 .pill { background: #111827; border: 1px solid #334057; border-radius: 999px; padding: 4px 8px; color: #dbe5ff; font-size: 11px; }
-.row { display: grid; grid-template-columns: 1fr 70px; gap: 8px; margin-bottom: 8px; }
-.row.three { grid-template-columns: 1fr 70px 70px; }
-input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; background: #111827; color: white; padding: 10px; font-size: 15px; }
+input, select, textarea { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; background: #111827; color: white; padding: 10px; font-size: 15px; }
 .miniBtn { width: 100%; border: 0; border-radius: 10px; padding: 10px; background: #374761; color: white; font-weight: 900; cursor: pointer; font-size: 14px; }
 .miniBtn.orange { background: var(--toast); }
-.buttonRow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-.serverItem, .guest { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px; border-radius: 12px; background: #111827; margin-bottom: 6px; border: 1px solid #334057; }
-.serverItem.next { border: 2px solid var(--toast); background: #172133; }
-.serverItem b, .guest b { font-size: 14px; }
-.serverItem small, .guest small { display: block; color: #aeb8ce; font-size: 12px; }
-.itemBtns { display: flex; gap: 6px; }
-.itemBtns button, .guest button { border: 0; border-radius: 8px; background: #2d3b55; color: #fff; padding: 7px 9px; font-weight: 800; cursor: pointer; }
-.itemBtns .make { background: var(--toast); }
-
-/* Tabs */
-.tabs { display: flex; gap: 6px; margin-bottom: 10px; }
-.tab { flex: 1; border: 0; border-radius: 10px; padding: 9px 4px; background: #26344d; color: #dbe5ff; font-weight: 900; cursor: pointer; font-size: 12px; text-align: center; }
-.tab.active { background: var(--toast); color: #fff; }
-
-/* Roster */
-.rosterItem { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: #111827; border: 1px solid #334057; border-radius: 10px; margin-bottom: 6px; }
-.rosterItem span { font-size: 14px; font-weight: 600; }
-.rosterItem button { border: 0; background: #ff4d4d; color: #fff; border-radius: 6px; padding: 5px 10px; font-weight: 800; cursor: pointer; font-size: 12px; }
+.guest { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px; border-radius: 12px; background: #111827; margin-bottom: 6px; border: 1px solid #334057; }
+.guest b { font-size: 14px; }
+.guest small { display: block; color: #aeb8ce; font-size: 12px; }
 
 /* Modal */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 20; }
@@ -176,36 +143,31 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
 .sheet h2 { margin: 0 0 16px; font-size: 22px; }
 .sheet .field { margin-bottom: 14px; }
 .sheet .field label { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 4px; }
-.sheet .field input,
-.sheet .field select { width: 100%; padding: 14px; font-size: 18px; border: 2px solid #ddd; border-radius: 12px; background: #fff; color: #111; }
-.sheet .field select { appearance: auto; }
-.sheet .field input:focus,
-.sheet .field select:focus { border-color: var(--toast); outline: none; }
+.sheet .field input, .sheet .field select { width: 100%; padding: 14px; font-size: 18px; border: 2px solid #ddd; border-radius: 12px; background: #fff; color: #111; }
 .sheet .actions { display: flex; gap: 10px; margin-top: 16px; }
 .sheet .actions button { flex: 1; padding: 14px; border: 0; border-radius: 12px; font-weight: 900; font-size: 16px; cursor: pointer; }
 .sheet .actions .cancel { background: #e5e7eb; color: #333; }
 .sheet .actions .seat { background: var(--toast); color: #fff; }
 
-/* Sync indicator */
-.sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #66d97f; margin-left: 6px; display: inline-block; }
-.sync-dot.offline { background: #e85454; }
-
-/* Info popup (long-press) */
-.info-popup { position: fixed; z-index: 25; background: #fff; color: #111; border-radius: 16px; padding: 18px 22px; box-shadow: 0 12px 50px rgba(0,0,0,.4); min-width: 220px; max-width: 300px; top: 50%; left: 50%; transform: translate(-50%,-50%); display: none; }
-.info-popup.show { display: block; }
-.info-popup h3 { margin: 0 0 10px; font-size: 20px; }
-.info-popup .info-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eee; font-size: 15px; }
-.info-popup .info-row:last-child { border: none; }
-.info-popup .info-label { color: #666; font-weight: 600; }
-.info-popup .info-val { font-weight: 800; }
+/* Info Popup */
 .info-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 24; display: none; }
 .info-overlay.show { display: block; }
+.info-popup { position: fixed; z-index: 25; background: #fff; color: #111; border-radius: 20px; padding: 22px; box-shadow: 0 12px 50px rgba(0,0,0,.4); min-width: 280px; top: 50%; left: 50%; transform: translate(-50%,-50%); display: none; }
+.info-popup.show { display: block; }
+.info-popup h3 { margin: 0 0 15px; font-size: 22px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+.info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 16px; }
+.info-row:last-child { border: none; }
+.info-label { color: #666; font-weight: 600; }
+.info-val { font-weight: 800; }
+.info-actions { margin-top: 15px; padding-top: 10px; border-top: 2px solid #eee; }
+
+.sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #66d97f; margin-left: 6px; display: inline-block; }
+.sync-dot.offline { background: #e85454; }
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
 <div class="app">
-  <!-- Top Bar -->
   <header class="topbar">
     <div class="brand">
       <div class="gator">TG</div>
@@ -222,7 +184,6 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
     <button class="btn primary" id="togglePanel">Panel</button>
   </header>
 
-  <!-- Floor Map (Full Screen) -->
   <section class="floorWrap">
     <div class="floor" id="floor">
       <div class="barShape"></div>
@@ -233,31 +194,29 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
         <div class="legend-item"><div class="legend-dot" style="background:var(--food)"></div>Eating</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--dirty)"></div>Dirty</div>
       </div>
-      <div class="version">v11</div>
+      <div class="version">v12</div>
     </div>
   </section>
 </div>
 
-<!-- Slide-out Panel -->
+<!-- Panel Overlay -->
 <div class="panel-overlay" id="panelOverlay"></div>
 <div class="panel" id="panel">
   <button class="panel-close" id="panelClose">X</button>
-
-  <!-- Server Rotation -->
+  
   <div class="card">
     <h3>Rotation <span class="pill">Next: <b id="nextServerCard">&mdash;</b></span></h3>
-    <div class="row">
+    <div style="display:flex; gap:8px; margin-bottom:8px">
       <select id="rosterPick"><option value="">Pick from roster</option></select>
-      <button class="miniBtn orange" id="addServerFromRoster">Add</button>
+      <button class="miniBtn orange" id="addServerFromRoster" style="width:70px">Add</button>
     </div>
     <div id="serverList"></div>
-    <div class="buttonRow">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px">
       <button class="miniBtn" id="skipServer">Skip</button>
       <button class="miniBtn" id="resetRotation">Reset</button>
     </div>
   </div>
 
-  <!-- Tabs -->
   <div class="tabs">
     <button class="tab active" data-tab="wait">Waitlist</button>
     <button class="tab" data-tab="res">Res</button>
@@ -265,13 +224,12 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
     <button class="tab" data-tab="day">Day</button>
   </div>
 
-  <!-- Waitlist -->
   <div id="waitPanel">
     <div class="card">
       <h3>Add Walk-In</h3>
-      <div class="row">
+      <div style="display:grid; grid-template-columns:1fr 60px; gap:8px">
         <input id="wName" placeholder="Name">
-        <input id="wSize" type="number" min="1" placeholder="#">
+        <input id="wSize" type="number" placeholder="#">
       </div>
       <input id="wNotes" placeholder="Notes" style="margin-top:6px">
       <button class="miniBtn orange" id="addWait" style="margin-top:8px">Add to Waitlist</button>
@@ -279,14 +237,13 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
     <div id="waitList"></div>
   </div>
 
-  <!-- Reservations -->
   <div id="resPanel" style="display:none">
     <div class="card">
       <h3>Add Reservation</h3>
-      <div class="row three">
+      <div style="display:grid; grid-template-columns:1fr 80px 60px; gap:8px">
         <input id="rName" placeholder="Name">
         <input id="rTime" placeholder="Time">
-        <input id="rSize" type="number" min="1" placeholder="#">
+        <input id="rSize" type="number" placeholder="#">
       </div>
       <input id="rNotes" placeholder="Notes" style="margin-top:6px">
       <button class="miniBtn orange" id="addRes" style="margin-top:8px">Add Reservation</button>
@@ -294,51 +251,34 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
     <div id="resList"></div>
   </div>
 
-  <!-- Roster -->
   <div id="rosterPanel" style="display:none">
     <div class="card">
       <h3>Staff Roster</h3>
-      <div class="row">
+      <div style="display:flex; gap:8px">
         <input id="rosterName" placeholder="Server name">
-        <button class="miniBtn orange" id="addRoster">Add</button>
+        <button class="miniBtn orange" id="addRoster" style="width:70px">Add</button>
       </div>
-      <small style="color:#aeb8ce;display:block;margin-bottom:8px">Your full staff list. Pick from here to add to tonight's rotation.</small>
-      <div id="rosterList"></div>
+      <div id="rosterList" style="margin-top:10px"></div>
     </div>
   </div>
 
-  <!-- Day -->
   <div id="dayPanel" style="display:none">
     <div class="card">
       <h3>Shift / Day</h3>
       <button class="miniBtn orange" id="exportShift">Export Shift CSV</button>
       <button class="miniBtn" id="resetDay" style="margin-top:8px">Export + Reset Day</button>
-      <button class="miniBtn" id="clearNoExport" style="margin-top:8px">Reset Without Export</button>
-      <small style="color:#aeb8ce;display:block;line-height:1.35;margin-top:10px">Export downloads a CSV. Reset clears tables, waitlist, and reservations but keeps your rotation and roster.</small>
-    </div>
-    <div class="card">
-      <h3>Shift Summary</h3>
-      <div id="shiftSummary" style="color:#dbe5ff;font-size:13px;line-height:1.5"></div>
+      <button class="miniBtn" id="clearNoExport" style="margin-top:8px">Reset (No Export)</button>
     </div>
   </div>
 </div>
 
-<!-- Seat Modal -->
+<!-- Modals -->
 <div class="modal" id="modal">
   <div class="sheet">
     <h2 id="modalTitle">Table</h2>
-    <div class="field">
-      <label>Party Size</label>
-      <input id="partySize" type="number" min="1" placeholder="How many?">
-    </div>
-    <div class="field">
-      <label>Server</label>
-      <select id="serverSelect"><option value="">Assign server</option></select>
-    </div>
-    <div class="field">
-      <label>Notes</label>
-      <input id="tableNotes" placeholder="Optional notes">
-    </div>
+    <div class="field"><label>Party Size</label><input id="partySize" type="number" placeholder="How many?"></div>
+    <div class="field"><label>Server</label><select id="serverSelect"></select></div>
+    <div class="field"><label>Notes</label><input id="tableNotes" placeholder="Optional notes"></div>
     <div class="actions">
       <button class="cancel" id="closeModal">Cancel</button>
       <button class="seat" id="seatTable">Seat</button>
@@ -346,19 +286,20 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
   </div>
 </div>
 
-<!-- Info Popup (long-press) -->
 <div class="info-overlay" id="infoOverlay"></div>
 <div class="info-popup" id="infoPopup">
   <h3 id="infoTitle">Table</h3>
   <div id="infoContent"></div>
+  <div class="info-actions">
+    <label style="font-size:12px; font-weight:700; color:#666">Change Server:</label>
+    <select id="swapServerSelect" style="margin-top:5px; background:#f7f8fb; color:#111; border:2px solid #ddd"></select>
+  </div>
 </div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-// ===== FIREBASE INIT =====
 const firebaseConfig = {
   apiKey: "AIzaSyDvSiFuIrhvh7vg_iYJHSIJjbG9JiXRkOU",
   authDomain: "tailgators-west-seating.firebaseapp.com",
@@ -372,46 +313,10 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const dbRef = db.ref('tailgators');
 
-// Sync indicator
-const syncDot = document.getElementById('syncDot');
-db.ref('.info/connected').on('value', snap => {
-  syncDot.classList.toggle('offline', !snap.val());
-});
-
-// ===== TABLE DEFINITIONS =====
-const tables = [
-  ['10','sixTop leftCol r1'],['11','small leftCol r2'],['12','small leftCol r3'],
-  ['13','small leftCol r4'],['14','small leftCol r5'],['15','small leftCol r6'],
-  ['16','small leftCol r7'],  ['17','small leftCol r8'],['18','small leftCol r9'],
-  ['20','sixTop top20'],['21','sixTop midCol r2'],['22','sixTop midCol r3'],
-  ['23','small midCol r5'],['24','small midCol r6'],['25','small midCol r7'],
-  ['26','small midCol r8'],['27','small midCol r9'],
-  ['30','t30'],['50','t50'],['60','t60'],['70','t70'],
-  ['61','rightSmall rcol1 rr2'],['62','rightSmall rcol1 rr3'],
-  ['63','rightSmall rcol1 rr5'],['64','rightSmall rcol1 rr6'],
-  ['65','rightSmall rcol1 rr7'],['66','rightSmall rcol1 rr8'],
-  ['67','rightSmall rcol1 rr9'],
-  ['71','rightSmall rcol2 rr2'],['72','rightSmall rcol2 rr3'],
-  ['73','rightSmall rcol2 rr4'],['74','rightSmall rcol2 rr5'],
-  ['75','rightSmall rcol2 rr6'],['76','rightSmall rcol2 rr7'],
-  ['77','rightSmall rcol2 rr8'],['78','rightSmall rcol2 rr9'],
-  ['31','barSeat bL1'],['32','barSeat bL2'],['33','barSeat bL3'],
-  ['51','barSeat bR1'],['52','barSeat bR2'],['53','barSeat bR3'],
-  ['40','sixTop aboveBar1'],['41','sixTop aboveBar2'],['42','sixTop aboveBar3']
-];
-
-const STATUS_CYCLE = ['open', 'seated', 'food', 'dirty'];
-
-// ===== STATE =====
-let state = { tables: {}, wait: [], res: [], servers: [], roster: [], rotationIndex: 0, shiftLog: [], shiftStarted: Date.now() };
-
-// ===== FIREBASE SYNC =====
-function pushState() {
-  dbRef.set(state);
-}
+let state = { tables: {}, wait: [], res: [], servers: [], roster: [], rotationIndex: 0, shiftLog: [] };
 
 dbRef.on('value', snap => {
-  let data = snap.val();
+  const data = snap.val();
   if (data) {
     state = data;
     state.tables = state.tables || {};
@@ -419,377 +324,213 @@ dbRef.on('value', snap => {
     state.res = state.res || [];
     state.servers = state.servers || [];
     state.roster = state.roster || [];
-    state.rotationIndex = state.rotationIndex || 0;
-    state.shiftLog = state.shiftLog || [];
-    state.shiftStarted = state.shiftStarted || Date.now();
     updateAll();
   }
 });
 
-function save() { pushState(); }
+function save() { dbRef.set(state); }
 
-// ===== DOM =====
-const floor = document.getElementById('floor');
-const modal = document.getElementById('modal');
-const panel = document.getElementById('panel');
-const panelOverlay = document.getElementById('panelOverlay');
+const tables = [
+  ['10','sixTop leftCol r1'],['11','small leftCol r2'],['12','small leftCol r3'],['13','small leftCol r4'],
+  ['14','small leftCol r5'],['15','small leftCol r6'],['16','small leftCol r7'],['17','small leftCol r8'],['18','small leftCol r9'],
+  ['20','sixTop top20'],['21','sixTop midCol r2'],['22','sixTop midCol r3'],['23','small midCol r5'],['24','small midCol r6'],
+  ['25','small midCol r7'],['26','small midCol r8'],['27','small midCol r9'],
+  ['30','sixTop t30'],['50','sixTop t50'],['60','small t60'],['70','sixTop t70'],
+  ['61','rightSmall rcol1 rr2'],['62','rightSmall rcol1 rr3'],['63','rightSmall rcol1 rr5'],['64','rightSmall rcol1 rr6'],
+  ['65','rightSmall rcol1 rr7'],['66','rightSmall rcol1 rr8'],['67','rightSmall rcol1 rr9'],
+  ['71','rightSmall rcol2 rr2'],['72','rightSmall rcol2 rr3'],['73','rightSmall rcol2 rr4'],['74','rightSmall rcol2 rr5'],
+  ['75','rightSmall rcol2 rr6'],['76','rightSmall rcol2 rr7'],['77','rightSmall rcol2 rr8'],['78','rightSmall rcol2 rr9'],
+  ['31','barSeat bL1'],['32','barSeat bL2'],['33','barSeat bL3'],['51','barSeat bR1'],['52','barSeat bR2'],['53','barSeat bR3'],
+  ['40','sixTop aboveBar1'],['41','sixTop aboveBar2'],['42','sixTop aboveBar3']
+];
 
-// ===== UTILITY =====
-function logEvent(action, detail) {
-  state.shiftLog.push({ time: new Date().toLocaleString(), action, detail: detail || '' });
-  if (state.shiftLog.length > 1500) state.shiftLog = state.shiftLog.slice(-1500);
-}
+const STATUS_CYCLE = ['open', 'seated', 'food', 'dirty'];
+
 function mins(t) { return t ? Math.floor((Date.now() - t) / 60000) : 0; }
-function currentServer() {
-  return state.servers.length ? state.servers[state.rotationIndex % state.servers.length] : '';
-}
-function advanceServer() {
-  if (state.servers.length) state.rotationIndex = (state.rotationIndex + 1) % state.servers.length;
-}
 
-// ===== TABLE CLICK =====
 function handleTableClick(n) {
   let t = state.tables[n];
   if (!t || t.status === 'open') {
     openSeatModal(n);
   } else {
     let idx = STATUS_CYCLE.indexOf(t.status);
-    let nextStatus = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
-    if (nextStatus === 'open') {
-      logEvent('Table ' + n, 'cleared (was ' + t.status + ') | server: ' + (t.server || ''));
-      delete state.tables[n];
-    } else {
-      t.status = nextStatus;
-      logEvent('Table ' + n, nextStatus + ' | server: ' + (t.server || ''));
-    }
+    let next = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
+    if (next === 'open') delete state.tables[n];
+    else state.tables[n].status = next;
     save();
   }
 }
 
 function openSeatModal(n) {
+  const m = document.getElementById('modal');
   document.getElementById('modalTitle').textContent = 'Table ' + n;
   document.getElementById('partySize').value = '';
   document.getElementById('tableNotes').value = '';
-  updateServerSelect();
-  document.getElementById('serverSelect').value = currentServer() || '';
-  modal.dataset.table = n;
-  modal.classList.add('show');
-}
-
-function updateServerSelect() {
-  document.getElementById('serverSelect').innerHTML = '<option value="">Assign server</option>' +
-    state.servers.map(x => '<option value="' + x + '">' + x + '</option>').join('');
+  const sel = document.getElementById('serverSelect');
+  sel.innerHTML = '<option value="">Assign server</option>' + state.servers.map(s => `<option value="${s}">${s}</option>`).join('');
+  const next = state.servers.length ? state.servers[state.rotationIndex % state.servers.length] : '';
+  sel.value = next;
+  m.dataset.table = n;
+  m.classList.add('show');
 }
 
 document.getElementById('seatTable').onclick = () => {
-  let n = modal.dataset.table;
-  let party = document.getElementById('partySize').value;
-  let server = document.getElementById('serverSelect').value;
-  let notes = document.getElementById('tableNotes').value;
-  state.tables[n] = { status: 'seated', party, server, notes, started: Date.now() };
-  logEvent('Table ' + n, 'seated | server: ' + (server || '') + ' | party: ' + (party || ''));
-  if (server && server === currentServer()) advanceServer();
-  modal.classList.remove('show');
+  const n = document.getElementById('modal').dataset.table;
+  const size = document.getElementById('partySize').value;
+  const server = document.getElementById('serverSelect').value;
+  const notes = document.getElementById('tableNotes').value;
+  state.tables[n] = { status: 'seated', party: size, server: server, notes: notes, started: Date.now() };
+  if (server && server === state.servers[state.rotationIndex % state.servers.length]) {
+    state.rotationIndex = (state.rotationIndex + 1) % state.servers.length;
+  }
+  document.getElementById('modal').classList.remove('show');
   save();
 };
-document.getElementById('closeModal').onclick = () => modal.classList.remove('show');
-modal.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
-
-// ===== RENDERING =====
-let holdTimer = null;
-let holdFired = false;
-
-function drawTables() {
-  tables.forEach(([n, cls]) => {
-    let d = document.createElement('div');
-    d.className = 'table ' + cls;
-    d.dataset.table = n;
-    d.innerHTML = '<div class="num">' + n + '</div><div class="server-name"></div><div class="badges"><span class="time-badge"></span><span class="party-badge"></span></div>';
-    // Tap vs long-press
-    d.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      holdFired = false;
-      holdTimer = setTimeout(() => { holdFired = true; showInfo(n); }, 500);
-    }, {passive: false});
-    d.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      clearTimeout(holdTimer);
-      if (!holdFired) handleTableClick(n);
-    }, {passive: false});
-    d.addEventListener('touchmove', () => { clearTimeout(holdTimer); });
-    d.addEventListener('touchcancel', () => { clearTimeout(holdTimer); });
-    // Desktop fallback
-    d.addEventListener('mousedown', (e) => {
-      if (e.button !== 0) return;
-      holdFired = false;
-      holdTimer = setTimeout(() => { holdFired = true; showInfo(n); }, 500);
-    });
-    d.addEventListener('mouseup', (e) => {
-      clearTimeout(holdTimer);
-      if (!holdFired) handleTableClick(n);
-    });
-    d.addEventListener('mouseleave', () => { clearTimeout(holdTimer); });
-    floor.appendChild(d);
-  });
-}
 
 function showInfo(n) {
-  let t = state.tables[n];
-  if (!t || t.status === 'open') return;
-  let satTime = t.started ? new Date(t.started).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}) : '—';
-  let elapsed = t.started ? mins(t.started) + ' min' : '—';
+  const t = state.tables[n];
+  if (!t) return;
   document.getElementById('infoTitle').textContent = 'Table ' + n;
-  document.getElementById('infoContent').innerHTML =
-    '<div class="info-row"><span class="info-label">Server</span><span class="info-val">' + (t.server || '—') + '</span></div>' +
-    '<div class="info-row"><span class="info-label">Party</span><span class="info-val">' + (t.party || '—') + '</span></div>' +
-    '<div class="info-row"><span class="info-label">Sat at</span><span class="info-val">' + satTime + '</span></div>' +
-    '<div class="info-row"><span class="info-label">Elapsed</span><span class="info-val">' + elapsed + '</span></div>' +
-    '<div class="info-row"><span class="info-label">Status</span><span class="info-val">' + (t.status || '—') + '</span></div>' +
-    (t.notes ? '<div class="info-row"><span class="info-label">Notes</span><span class="info-val">' + t.notes + '</span></div>' : '');
+  document.getElementById('infoContent').innerHTML = `
+    <div class="info-row"><span class="info-label">Server</span><span class="info-val">${t.server || '—'}</span></div>
+    <div class="info-row"><span class="info-label">Party</span><span class="info-val">${t.party || '—'}</span></div>
+    <div class="info-row"><span class="info-label">Sat</span><span class="info-val">${new Date(t.started).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</span></div>
+    <div class="info-row"><span class="info-label">Time</span><span class="info-val">${mins(t.started)}m</span></div>
+    <div class="info-row"><span class="info-label">Notes</span><span class="info-val">${t.notes || '—'}</span></div>
+  `;
+  const swap = document.getElementById('swapServerSelect');
+  swap.innerHTML = '<option value="">Swap Server...</option>' + state.servers.map(s => `<option value="${s}">${s}</option>`).join('');
+  swap.onchange = (e) => {
+    if (e.target.value) {
+      state.tables[n].server = e.target.value;
+      save();
+      document.getElementById('infoPopup').classList.remove('show');
+      document.getElementById('infoOverlay').classList.remove('show');
+    }
+  };
   document.getElementById('infoPopup').classList.add('show');
   document.getElementById('infoOverlay').classList.add('show');
 }
 
-document.getElementById('infoOverlay').onclick = () => {
-  document.getElementById('infoPopup').classList.remove('show');
-  document.getElementById('infoOverlay').classList.remove('show');
-};
-document.getElementById('infoPopup').onclick = () => {
-  document.getElementById('infoPopup').classList.remove('show');
-  document.getElementById('infoOverlay').classList.remove('show');
-};
+function updateAll() {
+  const floor = document.getElementById('floor');
+  const existing = floor.querySelectorAll('.table');
+  if (existing.length === 0) {
+    tables.forEach(([n, cls]) => {
+      const d = document.createElement('div');
+      d.className = 'table ' + cls;
+      d.dataset.table = n;
+      d.innerHTML = `<div class="num">${n}</div><div class="server-name"></div><div class="badges"><span class="time-badge"></span><span class="party-badge"></span></div>`;
+      
+      let holdTimer;
+      let holdFired = false;
 
-function renderTables() {
+      const onDown = (e) => {
+        holdFired = false;
+        holdTimer = setTimeout(() => { holdFired = true; showInfo(n); }, 600);
+      };
+      const onUp = (e) => {
+        clearTimeout(holdTimer);
+        if (!holdFired) handleTableClick(n);
+      };
+
+      d.addEventListener('touchstart', (e) => { e.preventDefault(); onDown(); }, {passive:false});
+      d.addEventListener('touchend', (e) => { e.preventDefault(); onUp(); }, {passive:false});
+      d.addEventListener('mousedown', (e) => { if(e.button===0) onDown(); });
+      d.addEventListener('mouseup', onUp);
+      floor.appendChild(d);
+    });
+  }
+
+  let covers = 0;
+  let seated = 0;
   document.querySelectorAll('.table').forEach(el => {
-    let n = el.dataset.table;
-    let s = state.tables[n] || { status: 'open' };
-    el.classList.remove('seated', 'food', 'dirty');
-    if (s.status && s.status !== 'open') el.classList.add(s.status);
-    el.querySelector('.server-name').textContent = (s.status && s.status !== 'open') ? (s.server || '') : '';
-    let timeBadge = el.querySelector('.time-badge');
-    let partyBadge = el.querySelector('.party-badge');
-    if (s.status && s.status !== 'open') {
-      timeBadge.textContent = s.started ? new Date(s.started).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}) : '';
-      partyBadge.textContent = s.party ? s.party : '';
+    const n = el.dataset.table;
+    const t = state.tables[n] || { status: 'open' };
+    el.classList.remove('seated', 'food', 'dirty', 'pulse');
+    if (t.status !== 'open') {
+      el.classList.add(t.status);
+      el.querySelector('.server-name').textContent = t.server || '';
+      el.querySelector('.time-badge').textContent = mins(t.started) + 'm';
+      el.querySelector('.party-badge').textContent = t.party || '';
+      if (t.status === 'seated' || t.status === 'food') seated++;
+      if (t.status === 'seated') covers += parseInt(t.party) || 0;
+      if (t.status === 'dirty' && mins(t.started) > 10) el.classList.add('pulse');
     } else {
-      timeBadge.textContent = '';
-      partyBadge.textContent = '';
+      el.querySelector('.server-name').textContent = '';
+      el.querySelector('.time-badge').textContent = '';
+      el.querySelector('.party-badge').textContent = '';
     }
   });
-}
 
-function renderServers() {
-  document.getElementById('serverList').innerHTML = state.servers.map((name, i) =>
-    '<div class="serverItem ' + (i === state.rotationIndex % state.servers.length ? 'next' : '') + '">' +
-      '<div><b>' + (i === state.rotationIndex % state.servers.length ? '\u27A1 ' : '') + name + '</b>' +
-      '<small>' + (i === state.rotationIndex % state.servers.length ? 'Next up' : '') + '</small></div>' +
-      '<div class="itemBtns">' +
-        '<button class="make" onclick="setNext(' + i + ')">Next</button>' +
-        '<button onclick="removeFromRotation(' + i + ')">X</button>' +
-      '</div></div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No servers on rotation.</div>';
-}
-
-function renderRoster() {
-  document.getElementById('rosterList').innerHTML = state.roster.map((name, i) =>
-    '<div class="rosterItem"><span>' + name + '</span><button onclick="removeFromRoster(' + i + ')">Remove</button></div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:12px">No staff added.</div>';
-  document.getElementById('rosterPick').innerHTML = '<option value="">Pick from roster</option>' +
-    state.roster.filter(n => !state.servers.includes(n)).map(n => '<option value="' + n + '">' + n + '</option>').join('');
-}
-
-function renderLists() {
-  document.getElementById('waitList').innerHTML = state.wait.map((g, i) =>
-    '<div class="guest"><div><b>' + g.name + (g.size ? ' \u2022 ' + g.size : '') + '</b>' +
-    '<small>' + mins(g.created) + 'm' + (g.notes ? ' \u2022 ' + g.notes : '') + '</small></div>' +
-    '<button onclick="doneWait(' + i + ')">Seat</button></div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No one waiting.</div>';
-
-  document.getElementById('resList').innerHTML = state.res.map((g, i) =>
-    '<div class="guest"><div><b>' + (g.time || '?') + ' \u2022 ' + g.name + (g.size ? ' \u2022 ' + g.size : '') + '</b>' +
-    '<small>' + (g.notes || '') + '</small></div>' +
-    '<button onclick="doneRes(' + i + ')">Done</button></div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No reservations.</div>';
-
-  let sum = document.getElementById('shiftSummary');
-  if (sum) {
-    sum.innerHTML = 'Started: ' + new Date(state.shiftStarted).toLocaleString() + '<br>' +
-      'Events: ' + state.shiftLog.length + '<br>' +
-      'Active tables: ' + Object.keys(state.tables).length + '<br>' +
-      'Servers: ' + state.servers.join(', ');
-  }
-}
-
-function updateCounts() {
-  let vals = Object.values(state.tables);
-  let activeStatuses = ['seated', 'food'];
-  document.getElementById('openCount').textContent = tables.length - vals.filter(x => x.status && x.status !== 'open').length;
-  document.getElementById('seatedCount').textContent = vals.filter(x => activeStatuses.includes(x.status)).length;
-  // Covers = only GREEN (seated/menus) tables — once food is sold, they drop off
-  let covers = 0;
-  vals.forEach(t => {
-    if (t.status === 'seated' && t.party) covers += parseInt(t.party) || 0;
-  });
+  document.getElementById('openCount').textContent = tables.length - Object.keys(state.tables).length;
+  document.getElementById('seatedCount').textContent = seated;
   document.getElementById('coversCount').textContent = covers;
   document.getElementById('waitCount').textContent = state.wait.length;
-  document.getElementById('nextServerTop').textContent = currentServer() || '\u2014';
-  document.getElementById('nextServerCard').textContent = currentServer() || '\u2014';
+  const next = state.servers.length ? state.servers[state.rotationIndex % state.servers.length] : '—';
+  document.getElementById('nextServerTop').textContent = next;
+  document.getElementById('nextServerCard').textContent = next;
+  
+  document.getElementById('serverList').innerHTML = state.servers.map((s, i) => `
+    <div class="guest" style="${i === state.rotationIndex % state.servers.length ? 'border:2px solid var(--toast)' : ''}">
+      <div><b>${s}</b><small>${i === state.rotationIndex % state.servers.length ? 'Next Up' : 'In Rotation'}</small></div>
+      <button onclick="state.servers.splice(${i},1); save()">X</button>
+    </div>
+  `).join('');
+
+  document.getElementById('rosterList').innerHTML = state.roster.map((s, i) => `
+    <div class="guest"><span>${s}</span><button onclick="state.roster.splice(${i},1); save()">Remove</button></div>
+  `).join('');
+
+  document.getElementById('waitList').innerHTML = state.wait.map((w, i) => `
+    <div class="guest"><div><b>${w.name} (${w.size})</b><small>${mins(w.created)}m - ${w.notes || ''}</small></div><button onclick="state.wait.splice(${i},1); save()">Seat</button></div>
+  `).join('');
+
+  document.getElementById('resList').innerHTML = state.res.map((r, i) => `
+    <div class="guest"><div><b>${r.time} - ${r.name} (${r.size})</b><small>${r.notes || ''}</small></div><button onclick="state.res.splice(${i},1); save()">Done</button></div>
+  `).join('');
+  
+  const sel = document.getElementById('rosterPick');
+  sel.innerHTML = '<option value="">Pick from roster</option>' + state.roster.filter(r => !state.servers.includes(r)).map(r => `<option value="${r}">${r}</option>`).join('');
 }
 
-function updateAll() {
-  updateCounts();
-  renderTables();
-  renderServers();
-  renderRoster();
-  renderLists();
-}
-
-// ===== PANEL =====
-function openPanel() { panel.classList.add('open'); panelOverlay.classList.add('show'); }
-function closePanel() { panel.classList.remove('open'); panelOverlay.classList.remove('show'); }
-document.getElementById('togglePanel').onclick = openPanel;
-document.getElementById('panelClose').onclick = closePanel;
-panelOverlay.onclick = closePanel;
-// Date display
-function updateDate() {
-  const d = new Date();
-  const opts = { weekday: 'short', month: 'short', day: 'numeric' };
-  document.getElementById('dateDisplay').textContent = d.toLocaleDateString('en-US', opts);
-}
-updateDate();
-setInterval(updateDate, 60000);
-
-// ===== SERVER ROTATION =====
-function setNext(i) { state.rotationIndex = i; save(); }
-function removeFromRotation(i) {
-  state.servers.splice(i, 1);
-  if (state.rotationIndex >= state.servers.length) state.rotationIndex = 0;
-  save();
-}
 document.getElementById('addServerFromRoster').onclick = () => {
-  let name = document.getElementById('rosterPick').value;
-  if (name && !state.servers.includes(name)) {
-    state.servers.push(name);
-    logEvent('Server Add', name);
-    document.getElementById('rosterPick').value = '';
-    save();
-  }
+  const s = document.getElementById('rosterPick').value;
+  if (s) { state.servers.push(s); save(); }
 };
-document.getElementById('skipServer').onclick = () => {
-  logEvent('Rotation Skip', 'Skipped ' + (currentServer() || ''));
-  advanceServer(); save();
-};
-document.getElementById('resetRotation').onclick = () => {
-  state.rotationIndex = 0;
-  logEvent('Rotation Reset', ''); save();
-};
-
-// ===== ROSTER =====
 document.getElementById('addRoster').onclick = () => {
-  let input = document.getElementById('rosterName');
-  let name = input.value.trim();
-  if (name && !state.roster.includes(name)) { state.roster.push(name); input.value = ''; save(); }
+  const s = document.getElementById('rosterName').value;
+  if (s) { state.roster.push(s); document.getElementById('rosterName').value=''; save(); }
 };
-document.getElementById('rosterName').addEventListener('keydown', e => {
-  if (e.key === 'Enter') document.getElementById('addRoster').click();
-});
-function removeFromRoster(i) {
-  let name = state.roster[i];
-  state.roster.splice(i, 1);
-  let si = state.servers.indexOf(name);
-  if (si !== -1) { state.servers.splice(si, 1); if (state.rotationIndex >= state.servers.length) state.rotationIndex = 0; }
-  save();
-}
-
-// ===== WAITLIST & RESERVATIONS =====
 document.getElementById('addWait').onclick = () => {
-  let name = document.getElementById('wName').value.trim();
-  let size = document.getElementById('wSize').value;
-  let notes = document.getElementById('wNotes').value.trim();
-  if (!name) return;
-  state.wait.push({ name, size, notes, created: Date.now() });
-  logEvent('Waitlist Add', name);
-  document.getElementById('wName').value = '';
-  document.getElementById('wSize').value = '';
-  document.getElementById('wNotes').value = '';
-  save();
+  const n = document.getElementById('wName').value;
+  const s = document.getElementById('wSize').value;
+  if (n) { state.wait.push({name:n, size:s, notes:document.getElementById('wNotes').value, created:Date.now()}); save(); }
 };
 document.getElementById('addRes').onclick = () => {
-  let name = document.getElementById('rName').value.trim();
-  let time = document.getElementById('rTime').value.trim();
-  let size = document.getElementById('rSize').value;
-  let notes = document.getElementById('rNotes').value.trim();
-  if (!name) return;
-  state.res.push({ name, time, size, notes, created: Date.now() });
-  logEvent('Reservation Add', (time || '') + ' | ' + name);
-  document.getElementById('rName').value = '';
-  document.getElementById('rTime').value = '';
-  document.getElementById('rSize').value = '';
-  document.getElementById('rNotes').value = '';
-  save();
+  const n = document.getElementById('rName').value;
+  if (n) { state.res.push({name:n, time:document.getElementById('rTime').value, size:document.getElementById('rSize').value, notes:document.getElementById('rNotes').value}); save(); }
 };
-function doneWait(i) {
-  let g = state.wait[i];
-  if (g) logEvent('Waitlist Done', g.name + ' | ' + mins(g.created) + 'm');
-  state.wait.splice(i, 1); save();
-}
-function doneRes(i) {
-  let g = state.res[i];
-  if (g) logEvent('Reservation Done', (g.time || '') + ' | ' + g.name);
-  state.res.splice(i, 1); save();
-}
+document.getElementById('skipServer').onclick = () => { state.rotationIndex++; save(); };
+document.getElementById('resetRotation').onclick = () => { state.rotationIndex = 0; save(); };
+document.getElementById('togglePanel').onclick = () => { document.getElementById('panel').classList.add('open'); document.getElementById('panelOverlay').classList.add('show'); };
+document.getElementById('panelClose').onclick = () => { document.getElementById('panel').classList.remove('open'); document.getElementById('panelOverlay').classList.remove('show'); };
+document.getElementById('panelOverlay').onclick = () => { document.getElementById('panel').classList.remove('open'); document.getElementById('panelOverlay').classList.remove('show'); };
+document.getElementById('infoOverlay').onclick = () => { document.getElementById('infoPopup').classList.remove('show'); document.getElementById('infoOverlay').classList.remove('show'); };
+document.getElementById('closeModal').onclick = () => { document.getElementById('modal').classList.remove('show'); };
 
-// ===== TABS =====
 document.querySelectorAll('.tab').forEach(t => {
   t.onclick = () => {
     document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
     t.classList.add('active');
-    document.getElementById('waitPanel').style.display = t.dataset.tab === 'wait' ? 'block' : 'none';
-    document.getElementById('resPanel').style.display = t.dataset.tab === 'res' ? 'block' : 'none';
-    document.getElementById('rosterPanel').style.display = t.dataset.tab === 'roster' ? 'block' : 'none';
-    document.getElementById('dayPanel').style.display = t.dataset.tab === 'day' ? 'block' : 'none';
+    ['wait','res','roster','day'].forEach(p => document.getElementById(p+'Panel').style.display = 'none');
+    document.getElementById(t.dataset.tab+'Panel').style.display = 'block';
   };
 });
 
-// ===== EXPORT & RESET =====
-function csvSafe(v) { v = String(v ?? ''); return '"' + v.replace(/"/g, '""') + '"'; }
-function exportCsv() {
-  let rows = [['Shift Started', new Date(state.shiftStarted).toLocaleString()],[],['Time','Action','Detail']];
-  state.shiftLog.forEach(e => rows.push([e.time, e.action, e.detail]));
-  rows.push([]);
-  rows.push(['Table','Status','Server','Party','Notes','Minutes']);
-  Object.keys(state.tables).sort((a,b) => Number(a)-Number(b)).forEach(n => {
-    let t = state.tables[n];
-    rows.push([n, t.status||'', t.server||'', t.party||'', t.notes||'', t.started ? mins(t.started) : '']);
-  });
-  let csv = rows.map(r => r.map(csvSafe).join(',')).join('\n');
-  let stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
-  let a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download = 'tailgators-shift-' + stamp + '.csv';
-  document.body.appendChild(a); a.click();
-  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-}
-function resetDayNow(doExport) {
-  if (doExport) exportCsv();
-  let keepServers = state.servers.slice();
-  let keepRoster = state.roster.slice();
-  state = { tables: {}, wait: [], res: [], servers: keepServers, roster: keepRoster, rotationIndex: 0, shiftLog: [], shiftStarted: Date.now() };
-  logEvent('Shift Started', 'New day/shift reset');
-  save();
-}
-document.getElementById('exportShift').onclick = () => exportCsv();
-document.getElementById('resetDay').onclick = () => { if (confirm('Export + reset? Roster stays.')) resetDayNow(true); };
-document.getElementById('clearNoExport').onclick = () => { if (confirm('Reset without export? Roster stays.')) resetDayNow(false); };
-
-// ===== INIT =====
-drawTables();
-updateAll();
-setInterval(() => { renderTables(); updateCounts(); }, 30000);
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js?v=11').catch(() => {});
-}
+const d = new Date();
+document.getElementById('dateDisplay').textContent = d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'});
+setInterval(updateAll, 10000);
 </script>
 </body>
 </html>
