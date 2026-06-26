@@ -65,20 +65,23 @@ button, input, select { font: inherit; }
 }
 
 /* Tables */
-.table { position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 7px; background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.15); display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: 1; user-select: none; cursor: pointer; transition: transform .1s; }
-.table .num { font-size: clamp(12px, 1.4vw, 18px); }
-.table .meta { font-size: clamp(7px, .7vw, 10px); font-weight: 700; margin-top: 2px; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 2px; }
+.table { position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 7px; background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.15); display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: 1; user-select: none; cursor: pointer; transition: transform .1s; padding: 2px; }
+.table .num { font-size: clamp(11px, 1.3vw, 16px); }
+.table .server-name { font-size: clamp(7px, .65vw, 9px); font-weight: 700; margin-top: 1px; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 1px; }
+.table .badges { position: absolute; bottom: 1px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 3px; font-size: clamp(7px, .55vw, 9px); font-weight: 700; opacity: .9; }
+.table .badges .time-badge { }
+.table .badges .party-badge { }
 .table.seated { background: var(--seated); }
 .table.food { background: var(--food); }
 .table.dirty { background: var(--dirty); color: #fff; }
 .table:active { transform: scale(.93); }
 
 /* Table sizes */
-.wide { width: 7%; height: 5.4%; }
-.small { width: 5%; height: 5.2%; }
-.rightSmall { width: 4.8%; height: 5%; }
-.sixTop { width: 7.5%; height: 5.6%; }
-.barSeat { width: 5%; height: 5%; }
+.sixTop { width: 7.5%; height: 7.5%; }
+.wide { width: 7%; height: 7%; }
+.small { width: 5.5%; height: 6.5%; }
+.rightSmall { width: 5.2%; height: 6.2%; }
+.barSeat { width: 5.2%; height: 6.2%; }
 
 /* Left column */
 .leftCol { left: 1%; }
@@ -93,11 +96,11 @@ button, input, select { font: inherit; }
 .r8 { top: 56%; }
 
 /* Top row */
-.top20 { top: 2%; left: 10.5%; width: 3.5%; height: 5%; }
-.t30 { top: 2%; left: 28%; width: 7%; height: 5.4%; }
-.t50 { top: 2%; left: 58%; width: 7%; height: 5.4%; }
-.t60 { top: 2%; left: 70%; width: 5%; height: 5.2%; }
-.t70 { top: 2%; left: 79%; width: 7%; height: 5.4%; }
+.top20 { top: 2%; left: 10.5%; width: 7.5%; height: 7.5%; }
+.t30 { top: 2%; left: 28%; width: 7.5%; height: 7.5%; }
+.t50 { top: 2%; left: 58%; width: 7.5%; height: 7.5%; }
+.t60 { top: 2%; left: 70%; width: 5.2%; height: 6.2%; }
+.t70 { top: 2%; left: 79%; width: 7.5%; height: 7.5%; }
 
 /* Right columns */
 .rcol1 { left: 70%; }
@@ -185,6 +188,17 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
 /* Sync indicator */
 .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #66d97f; margin-left: 6px; display: inline-block; }
 .sync-dot.offline { background: #e85454; }
+
+/* Info popup (long-press) */
+.info-popup { position: fixed; z-index: 25; background: #fff; color: #111; border-radius: 16px; padding: 18px 22px; box-shadow: 0 12px 50px rgba(0,0,0,.4); min-width: 220px; max-width: 300px; top: 50%; left: 50%; transform: translate(-50%,-50%); display: none; }
+.info-popup.show { display: block; }
+.info-popup h3 { margin: 0 0 10px; font-size: 20px; }
+.info-popup .info-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eee; font-size: 15px; }
+.info-popup .info-row:last-child { border: none; }
+.info-popup .info-label { color: #666; font-weight: 600; }
+.info-popup .info-val { font-weight: 800; }
+.info-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 24; display: none; }
+.info-overlay.show { display: block; }
 </style>
 </head>
 <body>
@@ -331,6 +345,13 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
   </div>
 </div>
 
+<!-- Info Popup (long-press) -->
+<div class="info-overlay" id="infoOverlay"></div>
+<div class="info-popup" id="infoPopup">
+  <h3 id="infoTitle">Table</h3>
+  <div id="infoContent"></div>
+</div>
+
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -358,10 +379,10 @@ db.ref('.info/connected').on('value', snap => {
 
 // ===== TABLE DEFINITIONS =====
 const tables = [
-  ['10','wide leftCol r1'],['11','small leftCol r2'],['12','small leftCol r3'],
+  ['10','sixTop leftCol r1'],['11','small leftCol r2'],['12','small leftCol r3'],
   ['13','small leftCol r4'],['14','small leftCol r5'],['15','small leftCol r6'],
   ['16','small leftCol r7'],['17','small leftCol r8'],['18','small leftCol rr9'],
-  ['20','top20'],['21','wide midCol r2'],['22','wide midCol r3'],
+  ['20','sixTop top20'],['21','sixTop midCol r2'],['22','sixTop midCol r3'],
   ['23','small midCol r5'],['24','small midCol r6'],['25','small midCol r7'],
   ['26','small midCol r8'],['27','small midCol rr9'],
   ['30','t30'],['50','t50'],['60','t60'],['70','t70'],
@@ -474,16 +495,55 @@ document.getElementById('closeModal').onclick = () => modal.classList.remove('sh
 modal.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
 
 // ===== RENDERING =====
+let holdTimer = null;
+let holdFired = false;
+
 function drawTables() {
   tables.forEach(([n, cls]) => {
     let d = document.createElement('div');
     d.className = 'table ' + cls;
     d.dataset.table = n;
-    d.innerHTML = '<div class="num">' + n + '</div><div class="meta"></div>';
-    d.onclick = () => handleTableClick(n);
+    d.innerHTML = '<div class="num">' + n + '</div><div class="server-name"></div><div class="badges"><span class="time-badge"></span><span class="party-badge"></span></div>';
+    // Tap vs long-press
+    d.addEventListener('pointerdown', (e) => {
+      holdFired = false;
+      holdTimer = setTimeout(() => { holdFired = true; showInfo(n); }, 500);
+    });
+    d.addEventListener('pointerup', (e) => {
+      clearTimeout(holdTimer);
+      if (!holdFired) handleTableClick(n);
+    });
+    d.addEventListener('pointerleave', () => { clearTimeout(holdTimer); });
+    d.addEventListener('pointercancel', () => { clearTimeout(holdTimer); });
     floor.appendChild(d);
   });
 }
+
+function showInfo(n) {
+  let t = state.tables[n];
+  if (!t || t.status === 'open') return;
+  let satTime = t.started ? new Date(t.started).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}) : '—';
+  let elapsed = t.started ? mins(t.started) + ' min' : '—';
+  document.getElementById('infoTitle').textContent = 'Table ' + n;
+  document.getElementById('infoContent').innerHTML =
+    '<div class="info-row"><span class="info-label">Server</span><span class="info-val">' + (t.server || '—') + '</span></div>' +
+    '<div class="info-row"><span class="info-label">Party</span><span class="info-val">' + (t.party || '—') + '</span></div>' +
+    '<div class="info-row"><span class="info-label">Sat at</span><span class="info-val">' + satTime + '</span></div>' +
+    '<div class="info-row"><span class="info-label">Elapsed</span><span class="info-val">' + elapsed + '</span></div>' +
+    '<div class="info-row"><span class="info-label">Status</span><span class="info-val">' + (t.status || '—') + '</span></div>' +
+    (t.notes ? '<div class="info-row"><span class="info-label">Notes</span><span class="info-val">' + t.notes + '</span></div>' : '');
+  document.getElementById('infoPopup').classList.add('show');
+  document.getElementById('infoOverlay').classList.add('show');
+}
+
+document.getElementById('infoOverlay').onclick = () => {
+  document.getElementById('infoPopup').classList.remove('show');
+  document.getElementById('infoOverlay').classList.remove('show');
+};
+document.getElementById('infoPopup').onclick = () => {
+  document.getElementById('infoPopup').classList.remove('show');
+  document.getElementById('infoOverlay').classList.remove('show');
+};
 
 function renderTables() {
   document.querySelectorAll('.table').forEach(el => {
@@ -491,7 +551,16 @@ function renderTables() {
     let s = state.tables[n] || { status: 'open' };
     el.classList.remove('seated', 'food', 'dirty');
     if (s.status && s.status !== 'open') el.classList.add(s.status);
-    el.querySelector('.meta').textContent = s.server || '';
+    el.querySelector('.server-name').textContent = (s.status && s.status !== 'open') ? (s.server || '') : '';
+    let timeBadge = el.querySelector('.time-badge');
+    let partyBadge = el.querySelector('.party-badge');
+    if (s.status && s.status !== 'open') {
+      timeBadge.textContent = s.started ? new Date(s.started).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}) : '';
+      partyBadge.textContent = s.party ? s.party : '';
+    } else {
+      timeBadge.textContent = '';
+      partyBadge.textContent = '';
+    }
   });
 }
 
@@ -542,10 +611,10 @@ function updateCounts() {
   let activeStatuses = ['seated', 'food'];
   document.getElementById('openCount').textContent = tables.length - vals.filter(x => x.status && x.status !== 'open').length;
   document.getElementById('seatedCount').textContent = vals.filter(x => activeStatuses.includes(x.status)).length;
-  // Covers = total party sizes of seated + food tables
+  // Covers = only GREEN (seated/menus) tables — once food is sold, they drop off
   let covers = 0;
   vals.forEach(t => {
-    if (activeStatuses.includes(t.status) && t.party) covers += parseInt(t.party) || 0;
+    if (t.status === 'seated' && t.party) covers += parseInt(t.party) || 0;
   });
   document.getElementById('coversCount').textContent = covers;
   document.getElementById('waitCount').textContent = state.wait.length;
