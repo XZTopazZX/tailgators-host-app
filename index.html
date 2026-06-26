@@ -12,38 +12,34 @@
   --floor: #c7c9d1;
   --ink: #172033;
   --open: #fff;
-  --seated: #ffe08a;
-  --food: #ffb45c;
-  --dirty: #ff8f8f;
+  --seated: #66d97f;
+  --food: #f5c842;
+  --dirty: #e85454;
   --toast: #f15b2a;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: white; overflow: hidden; }
 button, input, select { font: inherit; }
 
-.app { height: 100vh; display: grid; grid-template-rows: 54px 1fr; background: linear-gradient(180deg, #111827, #0b1020); }
+.app { height: 100vh; display: grid; grid-template-rows: 50px 1fr; background: linear-gradient(180deg, #111827, #0b1020); }
 
 /* Top Bar */
-.topbar { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.12); background: #121927; }
-.brand { display: flex; align-items: center; gap: 10px; min-width: 220px; }
-.gator { width: 32px; height: 32px; border-radius: 9px; background: var(--toast); display: grid; place-items: center; font-weight: 900; font-size: 12px; }
-.brand h1 { font-size: 17px; line-height: 1; margin: 0; }
-.brand small { display: block; color: #b8c0d5; font-size: 11px; margin-top: 2px; }
-.stats { display: flex; gap: 8px; flex: 1; }
-.stat { background: #1d2638; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 5px 10px; min-width: 88px; }
+.topbar { display: flex; align-items: center; gap: 10px; padding: 6px 12px; border-bottom: 1px solid rgba(255,255,255,.12); background: #121927; }
+.brand { display: flex; align-items: center; gap: 8px; }
+.gator { width: 30px; height: 30px; border-radius: 8px; background: var(--toast); display: grid; place-items: center; font-weight: 900; font-size: 11px; }
+.brand h1 { font-size: 15px; line-height: 1; margin: 0; }
+.stats { display: flex; gap: 6px; flex: 1; justify-content: center; }
+.stat { background: #1d2638; border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: 4px 10px; text-align: center; }
 .stat b { display: block; font-size: 15px; }
-.stat span { display: block; font-size: 10px; color: #aeb8ce; text-transform: uppercase; letter-spacing: .04em; }
-.btn { border: 0; border-radius: 11px; padding: 9px 12px; font-weight: 900; background: #2b3852; color: #fff; cursor: pointer; }
+.stat span { display: block; font-size: 9px; color: #aeb8ce; text-transform: uppercase; letter-spacing: .04em; }
+.btn { border: 0; border-radius: 9px; padding: 8px 12px; font-weight: 900; background: #2b3852; color: #fff; cursor: pointer; font-size: 13px; }
 .btn.primary { background: var(--toast); }
-.btn:active, .miniBtn:active { transform: scale(.97); }
+.btn:active { transform: scale(.97); }
 
-/* Main Layout */
-.main { display: grid; grid-template-columns: 1fr 340px; min-height: 0; }
-
-/* Floor */
-.floorWrap { padding: 10px; min-width: 0; overflow: hidden; }
-.floor { position: relative; width: 100%; height: 100%; min-height: 560px; background: var(--floor); border: 1px solid #8f95a2; border-radius: 14px; box-shadow: 0 10px 36px rgba(0,0,0,.25); overflow: hidden; }
-.version { position: absolute; right: 8px; bottom: 6px; z-index: 2; color: #667085; font-size: 11px; font-weight: 900; }
+/* Floor - Full Screen */
+.floorWrap { padding: 8px; overflow: hidden; position: relative; }
+.floor { position: relative; width: 100%; height: 100%; background: var(--floor); border: 1px solid #8f95a2; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.25); overflow: hidden; }
+.version { position: absolute; right: 8px; bottom: 6px; z-index: 2; color: #667085; font-size: 10px; font-weight: 900; }
 
 /* Bar shape */
 .barShape {
@@ -55,83 +51,93 @@ button, input, select { font: inherit; }
   border: 3px solid #8f95a2;
   border-radius: 50% 50% 0 0 / 60% 60% 0 0;
   border-bottom: none;
-  background: rgba(255,255,255,.12);
+  background: rgba(255,255,255,.1);
   z-index: 1;
 }
 .barLabel {
   position: absolute;
-  top: 43%;
-  left: 43%;
+  top: 44%;
+  left: 44%;
   color: #4a5060;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   z-index: 1;
 }
 
 /* Tables */
-.table { position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 7px; background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.18); display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: 1; user-select: none; cursor: pointer; transition: transform .1s; }
-.table .num { font-size: clamp(13px, 1.5vw, 19px); }
-.table .meta { font-size: clamp(7px, .75vw, 10px); font-weight: 700; margin-top: 2px; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 2px; }
+.table { position: absolute; z-index: 3; border: 2px solid #5d6472; border-radius: 7px; background: var(--open); color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.15); display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; line-height: 1; user-select: none; cursor: pointer; transition: transform .1s; }
+.table .num { font-size: clamp(12px, 1.4vw, 18px); }
+.table .meta { font-size: clamp(7px, .7vw, 10px); font-weight: 700; margin-top: 2px; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 2px; }
 .table.seated { background: var(--seated); }
 .table.food { background: var(--food); }
-.table.dirty { background: var(--dirty); }
-.table:active { transform: scale(.94); }
+.table.dirty { background: var(--dirty); color: #fff; }
+.table:active { transform: scale(.93); }
 
 /* Table sizes */
-.wide { width: 7.1%; height: 5.4%; }
-.small { width: 5.2%; height: 5.4%; }
-.rightSmall { width: 5.0%; height: 5.2%; }
-.sixTop { width: 8%; height: 5.8%; }
-.barSeat { width: 5.2%; height: 5.2%; }
+.wide { width: 7%; height: 5.4%; }
+.small { width: 5%; height: 5.2%; }
+.rightSmall { width: 4.8%; height: 5%; }
+.sixTop { width: 7.5%; height: 5.6%; }
+.barSeat { width: 5%; height: 5%; }
 
 /* Left column */
-.leftCol { left: 1.0%; }
-.midCol { left: 11.0%; }
-.r1 { top: 1.6%; }
-.r2 { top: 8.8%; }
+.leftCol { left: 1%; }
+.midCol { left: 10.5%; }
+.r1 { top: 2%; }
+.r2 { top: 9%; }
 .r3 { top: 16%; }
-.r4 { top: 23.2%; }
+.r4 { top: 23%; }
 .r5 { top: 35%; }
-.r6 { top: 42.2%; }
-.r7 { top: 49.4%; }
-.r8 { top: 56.6%; }
+.r6 { top: 42%; }
+.r7 { top: 49%; }
+.r8 { top: 56%; }
 
-/* Top row specials */
-.top20 { top: 1.6%; left: 11.0%; width: 3.5%; height: 5.2%; }
-.t30 { top: 1.6%; left: 31.2%; width: 7.2%; height: 5.4%; }
-.t50 { top: 1.6%; left: 61%; width: 7.2%; height: 5.4%; }
-.t60 { top: 1.6%; left: 73%; width: 5.2%; height: 5.4%; }
-.t70 { top: 1.6%; left: 82%; width: 7.2%; height: 5.4%; }
+/* Top row */
+.top20 { top: 2%; left: 10.5%; width: 3.5%; height: 5%; }
+.t30 { top: 2%; left: 28%; width: 7%; height: 5.4%; }
+.t50 { top: 2%; left: 58%; width: 7%; height: 5.4%; }
+.t60 { top: 2%; left: 70%; width: 5%; height: 5.2%; }
+.t70 { top: 2%; left: 79%; width: 7%; height: 5.4%; }
 
 /* Right columns */
-.rcol1 { left: 73%; }
-.rcol2 { left: 82%; }
-.rr2 { top: 8.8%; }
+.rcol1 { left: 70%; }
+.rcol2 { left: 79%; }
+.rr2 { top: 9%; }
 .rr3 { top: 16%; }
-.rr4 { top: 23.2%; }
+.rr4 { top: 23%; }
 .rr5 { top: 34%; }
-.rr6 { top: 41.2%; }
-.rr7 { top: 48.4%; }
-.rr8 { top: 55.6%; }
-.rr9 { top: 62.8%; }
+.rr6 { top: 41%; }
+.rr7 { top: 48%; }
+.rr8 { top: 55%; }
+.rr9 { top: 62%; }
 
-/* Bar-adjacent tables: left side (31,32,33) */
-.bL1 { top: 37%; left: 25%; }
-.bL2 { top: 44%; left: 25%; }
-.bL3 { top: 51%; left: 25%; }
+/* Bar left (31,32,33) */
+.bL1 { top: 37%; left: 24%; }
+.bL2 { top: 44%; left: 24%; }
+.bL3 { top: 51%; left: 24%; }
 
-/* Bar-adjacent tables: right side (51,52,53) */
+/* Bar right (51,52,53) */
 .bR1 { top: 37%; left: 62%; }
 .bR2 { top: 44%; left: 62%; }
 .bR3 { top: 51%; left: 62%; }
 
-/* Above bar: 6-tops (40,41,42) */
-.aboveBar1 { top: 27%; left: 32%; }
-.aboveBar2 { top: 27%; left: 42%; }
-.aboveBar3 { top: 27%; left: 52%; }
+/* Above bar 6-tops (40,41,42) */
+.aboveBar1 { top: 27%; left: 31%; }
+.aboveBar2 { top: 27%; left: 41%; }
+.aboveBar3 { top: 27%; left: 51%; }
 
-/* Dashboard */
-.dashboard { border-left: 1px solid rgba(255,255,255,.1); background: #161f2f; padding: 10px; overflow-y: auto; }
+/* Legend */
+.legend { position: absolute; bottom: 8px; left: 10px; display: flex; gap: 10px; z-index: 4; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #4a5060; font-weight: 700; }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; border: 1px solid #888; }
+
+/* Slide-out Panel */
+.panel-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 8; display: none; }
+.panel-overlay.show { display: block; }
+.panel { position: fixed; right: 0; top: 0; bottom: 0; width: min(380px, 90vw); background: #161f2f; z-index: 9; transform: translateX(100%); transition: transform .25s ease; overflow-y: auto; padding: 14px; padding-top: 60px; }
+.panel.open { transform: translateX(0); }
+.panel-close { position: absolute; top: 14px; right: 14px; border: 0; background: #2b3852; color: #fff; border-radius: 8px; padding: 8px 12px; font-weight: 900; cursor: pointer; }
+
 .card { background: #202b40; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
 .card h3 { margin: 0 0 8px; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
 .pill { background: #111827; border: 1px solid #334057; border-radius: 999px; padding: 4px 8px; color: #dbe5ff; font-size: 11px; }
@@ -151,18 +157,23 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
 
 /* Tabs */
 .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
-.tab { flex: 1; border: 0; border-radius: 10px; padding: 9px 6px; background: #26344d; color: #dbe5ff; font-weight: 900; cursor: pointer; font-size: 13px; }
+.tab { flex: 1; border: 0; border-radius: 10px; padding: 9px 4px; background: #26344d; color: #dbe5ff; font-weight: 900; cursor: pointer; font-size: 12px; text-align: center; }
 .tab.active { background: var(--toast); color: #fff; }
 
+/* Roster */
+.rosterItem { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: #111827; border: 1px solid #334057; border-radius: 10px; margin-bottom: 6px; }
+.rosterItem span { font-size: 14px; font-weight: 600; }
+.rosterItem button { border: 0; background: #ff4d4d; color: #fff; border-radius: 6px; padding: 5px 10px; font-weight: 800; cursor: pointer; font-size: 12px; }
+
 /* Modal */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 10; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 20; }
 .modal.show { display: flex; }
-.sheet { width: min(480px, 94vw); background: #f7f8fb; color: #111827; border-radius: 20px; padding: 20px; box-shadow: 0 20px 70px rgba(0,0,0,.5); }
+.sheet { width: min(440px, 92vw); background: #f7f8fb; color: #111827; border-radius: 20px; padding: 20px; box-shadow: 0 20px 70px rgba(0,0,0,.5); }
 .sheet h2 { margin: 0 0 16px; font-size: 22px; }
 .sheet .field { margin-bottom: 14px; }
 .sheet .field label { display: block; font-size: 13px; font-weight: 700; color: #555; margin-bottom: 4px; }
 .sheet .field input,
-.sheet .field select { width: 100%; padding: 14px; font-size: 17px; border: 2px solid #ddd; border-radius: 12px; background: #fff; color: #111; }
+.sheet .field select { width: 100%; padding: 14px; font-size: 18px; border: 2px solid #ddd; border-radius: 12px; background: #fff; color: #111; }
 .sheet .field select { appearance: auto; }
 .sheet .field input:focus,
 .sheet .field select:focus { border-color: var(--toast); outline: none; }
@@ -171,22 +182,9 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
 .sheet .actions .cancel { background: #e5e7eb; color: #333; }
 .sheet .actions .seat { background: var(--toast); color: #fff; }
 
-/* Roster */
-.rosterItem { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: #111827; border: 1px solid #334057; border-radius: 10px; margin-bottom: 6px; }
-.rosterItem span { font-size: 14px; font-weight: 600; }
-.rosterItem button { border: 0; background: #ff4d4d; color: #fff; border-radius: 6px; padding: 5px 10px; font-weight: 800; cursor: pointer; font-size: 12px; }
-
-/* Responsive */
-@media (max-width: 980px) {
-  .main { grid-template-columns: 1fr; }
-  .dashboard { position: fixed; right: 0; top: 54px; bottom: 0; width: min(360px, 94vw); transform: translateX(100%); transition: .2s; z-index: 7; }
-  .dashboard.open { transform: none; }
-  .stats { display: none; }
-  .floorWrap { padding: 6px; }
-  .floor { border-radius: 10px; }
-  .table .meta { display: none; }
-  .small, .wide, .rightSmall, .sixTop, .barSeat { height: 6%; }
-}
+/* Sync indicator */
+.sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #66d97f; margin-left: 6px; display: inline-block; }
+.sync-dot.offline { background: #e85454; }
 </style>
 </head>
 <body>
@@ -196,118 +194,121 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
   <header class="topbar">
     <div class="brand">
       <div class="gator">TG</div>
-      <div>
-        <h1>Tail-Gators Host</h1>
-        <small>v10</small>
-      </div>
+      <h1>Tail-Gators<span class="sync-dot" id="syncDot"></span></h1>
     </div>
     <div class="stats">
       <div class="stat"><b id="openCount">0</b><span>Open</span></div>
       <div class="stat"><b id="seatedCount">0</b><span>Seated</span></div>
-      <div class="stat"><b id="waitCount">0</b><span>Waiting</span></div>
-      <div class="stat"><b id="resCount">0</b><span>Res</span></div>
+      <div class="stat"><b id="coversCount">0</b><span>Covers</span></div>
+      <div class="stat"><b id="waitCount">0</b><span>Wait</span></div>
       <div class="stat"><b id="nextServerTop">&mdash;</b><span>Next</span></div>
     </div>
     <button class="btn" id="resetBtn">Day</button>
     <button class="btn primary" id="togglePanel">Panel</button>
   </header>
 
-  <!-- Main Content -->
-  <main class="main">
-    <!-- Floor Map -->
-    <section class="floorWrap">
-      <div class="floor" id="floor">
-        <div class="barShape"></div>
-        <div class="barLabel">BAR</div>
-        <div class="version">v10</div>
+  <!-- Floor Map (Full Screen) -->
+  <section class="floorWrap">
+    <div class="floor" id="floor">
+      <div class="barShape"></div>
+      <div class="barLabel">BAR</div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--open)"></div>Open</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--seated)"></div>Menus</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--food)"></div>Eating</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--dirty)"></div>Dirty</div>
       </div>
-    </section>
-
-    <!-- Dashboard Panel -->
-    <aside class="dashboard" id="dashboard">
-      <!-- Server Rotation Card -->
-      <div class="card">
-        <h3>Rotation <span class="pill">Next: <b id="nextServerCard">&mdash;</b></span></h3>
-        <div class="row">
-          <select id="rosterPick"><option value="">Pick from roster</option></select>
-          <button class="miniBtn orange" id="addServerFromRoster">Add</button>
-        </div>
-        <div id="serverList"></div>
-        <div class="buttonRow">
-          <button class="miniBtn" id="skipServer">Skip</button>
-          <button class="miniBtn" id="resetRotation">Reset</button>
-        </div>
-      </div>
-
-      <!-- Tabs -->
-      <div class="tabs">
-        <button class="tab active" data-tab="wait">Waitlist</button>
-        <button class="tab" data-tab="res">Reservations</button>
-        <button class="tab" data-tab="roster">Roster</button>
-        <button class="tab" data-tab="day">Day</button>
-      </div>
-
-      <!-- Waitlist Panel -->
-      <div id="waitPanel">
-        <div class="card">
-          <h3>Add Walk-In</h3>
-          <div class="row">
-            <input id="wName" placeholder="Name">
-            <input id="wSize" type="number" min="1" placeholder="#">
-          </div>
-          <input id="wNotes" placeholder="Notes" style="margin-top:6px">
-          <button class="miniBtn orange" id="addWait" style="margin-top:8px">Add to Waitlist</button>
-        </div>
-        <div id="waitList"></div>
-      </div>
-
-      <!-- Reservations Panel -->
-      <div id="resPanel" style="display:none">
-        <div class="card">
-          <h3>Add Reservation</h3>
-          <div class="row three">
-            <input id="rName" placeholder="Name">
-            <input id="rTime" placeholder="Time">
-            <input id="rSize" type="number" min="1" placeholder="#">
-          </div>
-          <input id="rNotes" placeholder="Notes" style="margin-top:6px">
-          <button class="miniBtn orange" id="addRes" style="margin-top:8px">Add Reservation</button>
-        </div>
-        <div id="resList"></div>
-      </div>
-
-      <!-- Roster Panel -->
-      <div id="rosterPanel" style="display:none">
-        <div class="card">
-          <h3>Staff Roster</h3>
-          <div class="row">
-            <input id="rosterName" placeholder="Server name">
-            <button class="miniBtn orange" id="addRoster">Add</button>
-          </div>
-          <small style="color:#aeb8ce;display:block;margin-bottom:8px">Add your staff here. Pick from this list when adding to tonight's rotation.</small>
-          <div id="rosterList"></div>
-        </div>
-      </div>
-
-      <!-- Day Panel -->
-      <div id="dayPanel" style="display:none">
-        <div class="card">
-          <h3>Shift / Day</h3>
-          <button class="miniBtn orange" id="exportShift">Export Shift CSV</button>
-          <button class="miniBtn" id="resetDay" style="margin-top:8px">Export + Reset Day</button>
-          <button class="miniBtn" id="clearNoExport" style="margin-top:8px">Reset Without Export</button>
-          <small style="color:#aeb8ce;display:block;line-height:1.35;margin-top:10px">Export downloads a CSV. Reset clears tables, waitlist, and reservations but keeps your server rotation and roster.</small>
-        </div>
-        <div class="card">
-          <h3>Shift Summary</h3>
-          <div id="shiftSummary" style="color:#dbe5ff;font-size:13px;line-height:1.5"></div>
-        </div>
-      </div>
-    </aside>
-  </main>
+      <div class="version">v11</div>
+    </div>
+  </section>
 </div>
 
-<!-- Seat Table Modal (only shows when tapping an OPEN table) -->
+<!-- Slide-out Panel -->
+<div class="panel-overlay" id="panelOverlay"></div>
+<div class="panel" id="panel">
+  <button class="panel-close" id="panelClose">X</button>
+
+  <!-- Server Rotation -->
+  <div class="card">
+    <h3>Rotation <span class="pill">Next: <b id="nextServerCard">&mdash;</b></span></h3>
+    <div class="row">
+      <select id="rosterPick"><option value="">Pick from roster</option></select>
+      <button class="miniBtn orange" id="addServerFromRoster">Add</button>
+    </div>
+    <div id="serverList"></div>
+    <div class="buttonRow">
+      <button class="miniBtn" id="skipServer">Skip</button>
+      <button class="miniBtn" id="resetRotation">Reset</button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-tab="wait">Waitlist</button>
+    <button class="tab" data-tab="res">Res</button>
+    <button class="tab" data-tab="roster">Roster</button>
+    <button class="tab" data-tab="day">Day</button>
+  </div>
+
+  <!-- Waitlist -->
+  <div id="waitPanel">
+    <div class="card">
+      <h3>Add Walk-In</h3>
+      <div class="row">
+        <input id="wName" placeholder="Name">
+        <input id="wSize" type="number" min="1" placeholder="#">
+      </div>
+      <input id="wNotes" placeholder="Notes" style="margin-top:6px">
+      <button class="miniBtn orange" id="addWait" style="margin-top:8px">Add to Waitlist</button>
+    </div>
+    <div id="waitList"></div>
+  </div>
+
+  <!-- Reservations -->
+  <div id="resPanel" style="display:none">
+    <div class="card">
+      <h3>Add Reservation</h3>
+      <div class="row three">
+        <input id="rName" placeholder="Name">
+        <input id="rTime" placeholder="Time">
+        <input id="rSize" type="number" min="1" placeholder="#">
+      </div>
+      <input id="rNotes" placeholder="Notes" style="margin-top:6px">
+      <button class="miniBtn orange" id="addRes" style="margin-top:8px">Add Reservation</button>
+    </div>
+    <div id="resList"></div>
+  </div>
+
+  <!-- Roster -->
+  <div id="rosterPanel" style="display:none">
+    <div class="card">
+      <h3>Staff Roster</h3>
+      <div class="row">
+        <input id="rosterName" placeholder="Server name">
+        <button class="miniBtn orange" id="addRoster">Add</button>
+      </div>
+      <small style="color:#aeb8ce;display:block;margin-bottom:8px">Your full staff list. Pick from here to add to tonight's rotation.</small>
+      <div id="rosterList"></div>
+    </div>
+  </div>
+
+  <!-- Day -->
+  <div id="dayPanel" style="display:none">
+    <div class="card">
+      <h3>Shift / Day</h3>
+      <button class="miniBtn orange" id="exportShift">Export Shift CSV</button>
+      <button class="miniBtn" id="resetDay" style="margin-top:8px">Export + Reset Day</button>
+      <button class="miniBtn" id="clearNoExport" style="margin-top:8px">Reset Without Export</button>
+      <small style="color:#aeb8ce;display:block;line-height:1.35;margin-top:10px">Export downloads a CSV. Reset clears tables, waitlist, and reservations but keeps your rotation and roster.</small>
+    </div>
+    <div class="card">
+      <h3>Shift Summary</h3>
+      <div id="shiftSummary" style="color:#dbe5ff;font-size:13px;line-height:1.5"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Seat Modal -->
 <div class="modal" id="modal">
   <div class="sheet">
     <h2 id="modalTitle">Table</h2>
@@ -330,21 +331,40 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
   </div>
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 <script>
+// ===== FIREBASE INIT =====
+const firebaseConfig = {
+  apiKey: "AIzaSyDvSiFuIrhvh7vg_iYJHSIJjbG9JiXRkOU",
+  authDomain: "tailgators-west-seating.firebaseapp.com",
+  databaseURL: "https://tailgators-west-seating-default-rtdb.firebaseio.com",
+  projectId: "tailgators-west-seating",
+  storageBucket: "tailgators-west-seating.firebasestorage.app",
+  messagingSenderId: "889514250602",
+  appId: "1:889514250602:web:9db3b6b28bea6af4ba1513"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const dbRef = db.ref('tailgators');
+
+// Sync indicator
+const syncDot = document.getElementById('syncDot');
+db.ref('.info/connected').on('value', snap => {
+  syncDot.classList.toggle('offline', !snap.val());
+});
+
 // ===== TABLE DEFINITIONS =====
-// [id, cssClass]
 const tables = [
-  // Left wall column
   ['10','wide leftCol r1'],['11','small leftCol r2'],['12','small leftCol r3'],
   ['13','small leftCol r4'],['14','small leftCol r5'],['15','small leftCol r6'],
   ['16','small leftCol r7'],['17','small leftCol r8'],['18','small leftCol rr9'],
-  // Mid column
   ['20','top20'],['21','wide midCol r2'],['22','wide midCol r3'],
   ['23','small midCol r5'],['24','small midCol r6'],['25','small midCol r7'],
   ['26','small midCol r8'],['27','small midCol rr9'],
-  // Top row
   ['30','t30'],['50','t50'],['60','t60'],['70','t70'],
-  // Right columns
   ['61','rightSmall rcol1 rr2'],['62','rightSmall rcol1 rr3'],
   ['63','rightSmall rcol1 rr5'],['64','rightSmall rcol1 rr6'],
   ['65','rightSmall rcol1 rr7'],['66','rightSmall rcol1 rr8'],
@@ -353,41 +373,44 @@ const tables = [
   ['73','rightSmall rcol2 rr4'],['74','rightSmall rcol2 rr5'],
   ['75','rightSmall rcol2 rr6'],['76','rightSmall rcol2 rr7'],
   ['77','rightSmall rcol2 rr8'],['78','rightSmall rcol2 rr9'],
-  // Bar left side (4-tops)
   ['31','barSeat bL1'],['32','barSeat bL2'],['33','barSeat bL3'],
-  // Bar right side (4-tops)
   ['51','barSeat bR1'],['52','barSeat bR2'],['53','barSeat bR3'],
-  // Above bar (6-tops)
   ['40','sixTop aboveBar1'],['41','sixTop aboveBar2'],['42','sixTop aboveBar3']
 ];
 
-// Status cycle: open -> seated -> food -> dirty -> open
 const STATUS_CYCLE = ['open', 'seated', 'food', 'dirty'];
 
 // ===== STATE =====
-function loadState() {
-  try {
-    return JSON.parse(localStorage.getItem('tg-host-v10') || localStorage.getItem('tg-host-v9') || localStorage.getItem('tg-host-v8') || '{}');
-  } catch (e) { return {}; }
-}
-function saveState() {
-  try { localStorage.setItem('tg-host-v10', JSON.stringify(state)); } catch (e) {}
+let state = { tables: {}, wait: [], res: [], servers: [], roster: [], rotationIndex: 0, shiftLog: [], shiftStarted: Date.now() };
+
+// ===== FIREBASE SYNC =====
+function pushState() {
+  dbRef.set(state);
 }
 
-let state = loadState();
-state.tables = state.tables || {};
-state.wait = state.wait || [];
-state.res = state.res || [];
-state.servers = state.servers || [];
-state.roster = state.roster || [];
-state.rotationIndex = state.rotationIndex || 0;
-state.shiftLog = state.shiftLog || [];
-state.shiftStarted = state.shiftStarted || Date.now();
+dbRef.on('value', snap => {
+  let data = snap.val();
+  if (data) {
+    state = data;
+    state.tables = state.tables || {};
+    state.wait = state.wait || [];
+    state.res = state.res || [];
+    state.servers = state.servers || [];
+    state.roster = state.roster || [];
+    state.rotationIndex = state.rotationIndex || 0;
+    state.shiftLog = state.shiftLog || [];
+    state.shiftStarted = state.shiftStarted || Date.now();
+    updateAll();
+  }
+});
+
+function save() { pushState(); }
 
 // ===== DOM =====
 const floor = document.getElementById('floor');
-const dashboard = document.getElementById('dashboard');
 const modal = document.getElementById('modal');
+const panel = document.getElementById('panel');
+const panelOverlay = document.getElementById('panelOverlay');
 
 // ===== UTILITY =====
 function logEvent(action, detail) {
@@ -401,24 +424,16 @@ function currentServer() {
 function advanceServer() {
   if (state.servers.length) state.rotationIndex = (state.rotationIndex + 1) % state.servers.length;
 }
-function save() { saveState(); updateAll(); }
 
-// ===== TABLE CLICK LOGIC =====
-// If table is OPEN -> show modal to assign server/party
-// If table is seated/food/dirty -> cycle to next status
+// ===== TABLE CLICK =====
 function handleTableClick(n) {
   let t = state.tables[n];
   if (!t || t.status === 'open') {
-    // Open table: show seat modal
     openSeatModal(n);
   } else {
-    // Cycle: seated -> food -> dirty -> open
     let idx = STATUS_CYCLE.indexOf(t.status);
-    let nextIdx = (idx + 1) % STATUS_CYCLE.length;
-    let nextStatus = STATUS_CYCLE[nextIdx];
-
+    let nextStatus = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
     if (nextStatus === 'open') {
-      // Going back to open: unassign everything
       logEvent('Table ' + n, 'cleared (was ' + t.status + ') | server: ' + (t.server || ''));
       delete state.tables[n];
     } else {
@@ -434,42 +449,27 @@ function openSeatModal(n) {
   document.getElementById('partySize').value = '';
   document.getElementById('tableNotes').value = '';
   updateServerSelect();
-  // Pre-select next server in rotation
   document.getElementById('serverSelect').value = currentServer() || '';
   modal.dataset.table = n;
   modal.classList.add('show');
 }
 
 function updateServerSelect() {
-  let sel = document.getElementById('serverSelect');
-  sel.innerHTML = '<option value="">Assign server</option>' +
+  document.getElementById('serverSelect').innerHTML = '<option value="">Assign server</option>' +
     state.servers.map(x => '<option value="' + x + '">' + x + '</option>').join('');
 }
 
-// Seat button in modal
 document.getElementById('seatTable').onclick = () => {
   let n = modal.dataset.table;
   let party = document.getElementById('partySize').value;
   let server = document.getElementById('serverSelect').value;
   let notes = document.getElementById('tableNotes').value;
-
-  state.tables[n] = {
-    status: 'seated',
-    party,
-    server,
-    notes,
-    started: Date.now()
-  };
-
-  logEvent('Table ' + n, 'seated | server: ' + (server || '') + ' | party: ' + (party || '') + ' | notes: ' + (notes || ''));
-
-  // Advance rotation if this server was next
+  state.tables[n] = { status: 'seated', party, server, notes, started: Date.now() };
+  logEvent('Table ' + n, 'seated | server: ' + (server || '') + ' | party: ' + (party || ''));
   if (server && server === currentServer()) advanceServer();
-
   modal.classList.remove('show');
   save();
 };
-
 document.getElementById('closeModal').onclick = () => modal.classList.remove('show');
 modal.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
 
@@ -491,34 +491,27 @@ function renderTables() {
     let s = state.tables[n] || { status: 'open' };
     el.classList.remove('seated', 'food', 'dirty');
     if (s.status && s.status !== 'open') el.classList.add(s.status);
-    // Only show server name on the table
     el.querySelector('.meta').textContent = s.server || '';
   });
 }
 
 function renderServers() {
-  const list = document.getElementById('serverList');
-  list.innerHTML = state.servers.map((name, i) =>
+  document.getElementById('serverList').innerHTML = state.servers.map((name, i) =>
     '<div class="serverItem ' + (i === state.rotationIndex % state.servers.length ? 'next' : '') + '">' +
       '<div><b>' + (i === state.rotationIndex % state.servers.length ? '\u27A1 ' : '') + name + '</b>' +
       '<small>' + (i === state.rotationIndex % state.servers.length ? 'Next up' : '') + '</small></div>' +
       '<div class="itemBtns">' +
         '<button class="make" onclick="setNext(' + i + ')">Next</button>' +
         '<button onclick="removeFromRotation(' + i + ')">X</button>' +
-      '</div>' +
-    '</div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:13px;padding:8px">No servers on rotation. Add from roster above.</div>';
+      '</div></div>'
+  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No servers on rotation.</div>';
 }
 
 function renderRoster() {
-  const list = document.getElementById('rosterList');
-  list.innerHTML = state.roster.map((name, i) =>
+  document.getElementById('rosterList').innerHTML = state.roster.map((name, i) =>
     '<div class="rosterItem"><span>' + name + '</span><button onclick="removeFromRoster(' + i + ')">Remove</button></div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:13px">No staff added yet.</div>';
-
-  // Update roster picker dropdown
-  let pick = document.getElementById('rosterPick');
-  pick.innerHTML = '<option value="">Pick from roster</option>' +
+  ).join('') || '<div style="color:#aeb8ce;font-size:12px">No staff added.</div>';
+  document.getElementById('rosterPick').innerHTML = '<option value="">Pick from roster</option>' +
     state.roster.filter(n => !state.servers.includes(n)).map(n => '<option value="' + n + '">' + n + '</option>').join('');
 }
 
@@ -527,29 +520,35 @@ function renderLists() {
     '<div class="guest"><div><b>' + g.name + (g.size ? ' \u2022 ' + g.size : '') + '</b>' +
     '<small>' + mins(g.created) + 'm' + (g.notes ? ' \u2022 ' + g.notes : '') + '</small></div>' +
     '<button onclick="doneWait(' + i + ')">Seat</button></div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:13px;padding:8px">No one waiting.</div>';
+  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No one waiting.</div>';
 
   document.getElementById('resList').innerHTML = state.res.map((g, i) =>
     '<div class="guest"><div><b>' + (g.time || '?') + ' \u2022 ' + g.name + (g.size ? ' \u2022 ' + g.size : '') + '</b>' +
     '<small>' + (g.notes || '') + '</small></div>' +
     '<button onclick="doneRes(' + i + ')">Done</button></div>'
-  ).join('') || '<div style="color:#aeb8ce;font-size:13px;padding:8px">No reservations.</div>';
+  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No reservations.</div>';
 
   let sum = document.getElementById('shiftSummary');
   if (sum) {
     sum.innerHTML = 'Started: ' + new Date(state.shiftStarted).toLocaleString() + '<br>' +
       'Events: ' + state.shiftLog.length + '<br>' +
       'Active tables: ' + Object.keys(state.tables).length + '<br>' +
-      'Servers tonight: ' + state.servers.join(', ');
+      'Servers: ' + state.servers.join(', ');
   }
 }
 
 function updateCounts() {
   let vals = Object.values(state.tables);
+  let activeStatuses = ['seated', 'food'];
   document.getElementById('openCount').textContent = tables.length - vals.filter(x => x.status && x.status !== 'open').length;
-  document.getElementById('seatedCount').textContent = vals.filter(x => ['seated', 'food'].includes(x.status)).length;
+  document.getElementById('seatedCount').textContent = vals.filter(x => activeStatuses.includes(x.status)).length;
+  // Covers = total party sizes of seated + food tables
+  let covers = 0;
+  vals.forEach(t => {
+    if (activeStatuses.includes(t.status) && t.party) covers += parseInt(t.party) || 0;
+  });
+  document.getElementById('coversCount').textContent = covers;
   document.getElementById('waitCount').textContent = state.wait.length;
-  document.getElementById('resCount').textContent = state.res.length;
   document.getElementById('nextServerTop').textContent = currentServer() || '\u2014';
   document.getElementById('nextServerCard').textContent = currentServer() || '\u2014';
 }
@@ -562,6 +561,17 @@ function updateAll() {
   renderLists();
 }
 
+// ===== PANEL =====
+function openPanel() { panel.classList.add('open'); panelOverlay.classList.add('show'); }
+function closePanel() { panel.classList.remove('open'); panelOverlay.classList.remove('show'); }
+document.getElementById('togglePanel').onclick = openPanel;
+document.getElementById('panelClose').onclick = closePanel;
+panelOverlay.onclick = closePanel;
+document.getElementById('resetBtn').onclick = () => {
+  openPanel();
+  document.querySelector('[data-tab="day"]').click();
+};
+
 // ===== SERVER ROTATION =====
 function setNext(i) { state.rotationIndex = i; save(); }
 function removeFromRotation(i) {
@@ -569,47 +579,36 @@ function removeFromRotation(i) {
   if (state.rotationIndex >= state.servers.length) state.rotationIndex = 0;
   save();
 }
-
 document.getElementById('addServerFromRoster').onclick = () => {
-  let pick = document.getElementById('rosterPick');
-  let name = pick.value;
+  let name = document.getElementById('rosterPick').value;
   if (name && !state.servers.includes(name)) {
     state.servers.push(name);
     logEvent('Server Add', name);
-    pick.value = '';
+    document.getElementById('rosterPick').value = '';
     save();
   }
 };
-
 document.getElementById('skipServer').onclick = () => {
   logEvent('Rotation Skip', 'Skipped ' + (currentServer() || ''));
-  advanceServer();
-  save();
+  advanceServer(); save();
 };
 document.getElementById('resetRotation').onclick = () => {
   state.rotationIndex = 0;
-  logEvent('Rotation Reset', '');
-  save();
+  logEvent('Rotation Reset', ''); save();
 };
 
 // ===== ROSTER =====
 document.getElementById('addRoster').onclick = () => {
   let input = document.getElementById('rosterName');
   let name = input.value.trim();
-  if (name && !state.roster.includes(name)) {
-    state.roster.push(name);
-    input.value = '';
-    save();
-  }
+  if (name && !state.roster.includes(name)) { state.roster.push(name); input.value = ''; save(); }
 };
 document.getElementById('rosterName').addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('addRoster').click();
 });
-
 function removeFromRoster(i) {
   let name = state.roster[i];
   state.roster.splice(i, 1);
-  // Also remove from tonight's rotation if present
   let si = state.servers.indexOf(name);
   if (si !== -1) { state.servers.splice(si, 1); if (state.rotationIndex >= state.servers.length) state.rotationIndex = 0; }
   save();
@@ -622,13 +621,12 @@ document.getElementById('addWait').onclick = () => {
   let notes = document.getElementById('wNotes').value.trim();
   if (!name) return;
   state.wait.push({ name, size, notes, created: Date.now() });
-  logEvent('Waitlist Add', name + (size ? ' | ' + size : ''));
+  logEvent('Waitlist Add', name);
   document.getElementById('wName').value = '';
   document.getElementById('wSize').value = '';
   document.getElementById('wNotes').value = '';
   save();
 };
-
 document.getElementById('addRes').onclick = () => {
   let name = document.getElementById('rName').value.trim();
   let time = document.getElementById('rTime').value.trim();
@@ -643,18 +641,15 @@ document.getElementById('addRes').onclick = () => {
   document.getElementById('rNotes').value = '';
   save();
 };
-
 function doneWait(i) {
   let g = state.wait[i];
   if (g) logEvent('Waitlist Done', g.name + ' | ' + mins(g.created) + 'm');
-  state.wait.splice(i, 1);
-  save();
+  state.wait.splice(i, 1); save();
 }
 function doneRes(i) {
   let g = state.res[i];
   if (g) logEvent('Reservation Done', (g.time || '') + ' | ' + g.name);
-  state.res.splice(i, 1);
-  save();
+  state.res.splice(i, 1); save();
 }
 
 // ===== TABS =====
@@ -671,30 +666,23 @@ document.querySelectorAll('.tab').forEach(t => {
 
 // ===== EXPORT & RESET =====
 function csvSafe(v) { v = String(v ?? ''); return '"' + v.replace(/"/g, '""') + '"'; }
-
 function exportCsv() {
-  let rows = [
-    ['Shift Started', new Date(state.shiftStarted).toLocaleString()],
-    [],
-    ['Time', 'Action', 'Detail']
-  ];
+  let rows = [['Shift Started', new Date(state.shiftStarted).toLocaleString()],[],['Time','Action','Detail']];
   state.shiftLog.forEach(e => rows.push([e.time, e.action, e.detail]));
   rows.push([]);
-  rows.push(['Table', 'Status', 'Server', 'Party', 'Notes', 'Minutes']);
-  Object.keys(state.tables).sort((a, b) => Number(a) - Number(b)).forEach(n => {
+  rows.push(['Table','Status','Server','Party','Notes','Minutes']);
+  Object.keys(state.tables).sort((a,b) => Number(a)-Number(b)).forEach(n => {
     let t = state.tables[n];
-    rows.push([n, t.status || '', t.server || '', t.party || '', t.notes || '', t.started ? mins(t.started) : '']);
+    rows.push([n, t.status||'', t.server||'', t.party||'', t.notes||'', t.started ? mins(t.started) : '']);
   });
   let csv = rows.map(r => r.map(csvSafe).join(',')).join('\n');
-  let stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+  let stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
   let a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   a.download = 'tailgators-shift-' + stamp + '.csv';
-  document.body.appendChild(a);
-  a.click();
+  document.body.appendChild(a); a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
 }
-
 function resetDayNow(doExport) {
   if (doExport) exportCsv();
   let keepServers = state.servers.slice();
@@ -703,30 +691,17 @@ function resetDayNow(doExport) {
   logEvent('Shift Started', 'New day/shift reset');
   save();
 }
-
 document.getElementById('exportShift').onclick = () => exportCsv();
-document.getElementById('resetDay').onclick = () => {
-  if (confirm('Export this shift and reset? Server list and roster stay.')) resetDayNow(true);
-};
-document.getElementById('clearNoExport').onclick = () => {
-  if (confirm('Reset without exporting? Server list and roster stay.')) resetDayNow(false);
-};
-
-// ===== PANEL TOGGLE =====
-document.getElementById('togglePanel').onclick = () => dashboard.classList.toggle('open');
-document.getElementById('resetBtn').onclick = () => {
-  dashboard.classList.add('open');
-  document.querySelector('[data-tab="day"]').click();
-};
+document.getElementById('resetDay').onclick = () => { if (confirm('Export + reset? Roster stays.')) resetDayNow(true); };
+document.getElementById('clearNoExport').onclick = () => { if (confirm('Reset without export? Roster stays.')) resetDayNow(false); };
 
 // ===== INIT =====
 drawTables();
 updateAll();
-setInterval(() => { renderTables(); renderLists(); updateCounts(); }, 30000);
+setInterval(() => { renderTables(); updateCounts(); }, 30000);
 
-// Service Worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js?v=10').catch(() => {});
+  navigator.serviceWorker.register('sw.js?v=11').catch(() => {});
 }
 </script>
 </body>
