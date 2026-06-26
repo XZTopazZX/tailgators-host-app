@@ -127,9 +127,9 @@ button, input, select { font: inherit; }
 .aboveBar3 { top: 27%; left: 51%; }
 
 /* Legend */
-.legend { position: absolute; bottom: 8px; left: 10px; display: flex; gap: 10px; z-index: 4; }
-.legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #4a5060; font-weight: 700; }
-.legend-dot { width: 12px; height: 12px; border-radius: 3px; border: 1px solid #888; }
+.legend { position: absolute; bottom: 14px; left: 14px; display: flex; gap: 20px; z-index: 4; background: rgba(255,255,255,.85); padding: 10px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 15px; color: #222; font-weight: 800; }
+.legend-dot { width: 22px; height: 22px; border-radius: 5px; border: 2px solid #666; }
 
 /* Slide-out Panel */
 .panel-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 8; display: none; }
@@ -194,7 +194,7 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
   <header class="topbar">
     <div class="brand">
       <div class="gator">TG</div>
-      <h1>Tail-Gators<span class="sync-dot" id="syncDot"></span></h1>
+      <h1>Tail-Gators SLW<span class="sync-dot" id="syncDot"></span></h1>
     </div>
     <div class="stats">
       <div class="stat"><b id="openCount">0</b><span>Open</span></div>
@@ -203,7 +203,7 @@ input, select { width: 100%; border: 1px solid #3d4a63; border-radius: 10px; bac
       <div class="stat"><b id="waitCount">0</b><span>Wait</span></div>
       <div class="stat"><b id="nextServerTop">&mdash;</b><span>Next</span></div>
     </div>
-    <button class="btn" id="resetBtn">Day</button>
+    <div class="stat" style="background:none;border:none;padding:2px 6px"><b id="dateDisplay" style="font-size:12px"></b><span>Today</span></div>
     <button class="btn primary" id="togglePanel">Panel</button>
   </header>
 
@@ -567,10 +567,14 @@ function closePanel() { panel.classList.remove('open'); panelOverlay.classList.r
 document.getElementById('togglePanel').onclick = openPanel;
 document.getElementById('panelClose').onclick = closePanel;
 panelOverlay.onclick = closePanel;
-document.getElementById('resetBtn').onclick = () => {
-  openPanel();
-  document.querySelector('[data-tab="day"]').click();
-};
+// Date display
+function updateDate() {
+  const d = new Date();
+  const opts = { weekday: 'short', month: 'short', day: 'numeric' };
+  document.getElementById('dateDisplay').textContent = d.toLocaleDateString('en-US', opts);
+}
+updateDate();
+setInterval(updateDate, 60000);
 
 // ===== SERVER ROTATION =====
 function setNext(i) { state.rotationIndex = i; save(); }
