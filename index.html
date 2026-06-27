@@ -86,13 +86,13 @@ button,input,select,textarea{font:inherit;}
 .t70{top:2%;left:82%;}
 .rcol1{left:71%}.rcol2{left:82%;}
 .rr2{top:13%}.rr3{top:24%}.rr4{top:35%}
-.rr5{top:46%}.rr6{top:57%}.rr7{top:68%}.rr8{top:79%}.rr9{top:90%}
+.rr5{top:47%}.rr6{top:58%}.rr7{top:69%}.rr8{top:80%}.rr9{top:91%}
 .bL1{top:47%;left:26%}.bL2{top:58%;left:26%}.bL3{top:69%;left:26%}
 .bR1{top:47%;left:62%}.bR2{top:58%;left:62%}.bR3{top:69%;left:62%}
 .aboveBar1{top:35%;left:32%}.aboveBar2{top:35%;left:42%}.aboveBar3{top:35%;left:52%}
 
 /* Legend */
-.legend{position:absolute;bottom:14px;left:14px;display:flex;gap:14px;z-index:4;background:rgba(255,255,255,.88);padding:9px 16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.legend{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:14px;z-index:4;background:rgba(255,255,255,.88);padding:9px 16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
 .legend-item{display:flex;align-items:center;gap:7px;font-size:14px;color:#222;font-weight:800;}
 .legend-dot{width:20px;height:20px;border-radius:5px;border:2px solid #666;}
 
@@ -216,7 +216,7 @@ input,select,textarea{width:100%;border:1px solid #3d4a63;border-radius:10px;bac
         <div class="legend-item"><div class="legend-dot" style="background:var(--food)"></div>Eating</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--dirty)"></div>Dirty</div>
       </div>
-      <div class="version">v16</div>
+      <div class="version">v17</div>
     </div>
   </section>
 </div>
@@ -396,10 +396,13 @@ const tables = [
 ];
 
 // Load
+let isFirstLoad = true;
 onValue(dbRef, (snap) => {
   const d = snap.val();
   if(d){
+    // Merge incoming data into state
     state = {...state, ...d};
+    // Ensure arrays exist
     if(!state.tables) state.tables = {};
     if(!state.servers) state.servers = [];
     if(!state.roster) state.roster = [];
@@ -408,10 +411,19 @@ onValue(dbRef, (snap) => {
     if(!state.shiftLog) state.shiftLog = [];
     updateAll();
     document.getElementById('syncDot').classList.remove('offline');
+    isFirstLoad = false;
+  } else if (isFirstLoad) {
+    // If database is totally empty on first ever load, initialize it
+    save();
+    isFirstLoad = false;
   }
 }, { cancelCallback: () => document.getElementById('syncDot').classList.add('offline') });
 
-function save(){ set(dbRef, state); }
+function save(){ 
+  // Safety: never save if state was somehow wiped
+  if(!state.roster && !isFirstLoad) return; 
+  set(dbRef, state); 
+}
 
 // Utils
 const fmt = (ts) => ts ? new Date(ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '—';
