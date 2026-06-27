@@ -216,7 +216,7 @@ input,select,textarea{width:100%;border:1px solid #3d4a63;border-radius:10px;bac
         <div class="legend-item"><div class="legend-dot" style="background:var(--food)"></div>Eating</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--dirty)"></div>Dirty</div>
       </div>
-      <div class="version">v17</div>
+      <div class="version">v18</div>
     </div>
   </section>
 </div>
@@ -400,9 +400,7 @@ let isFirstLoad = true;
 onValue(dbRef, (snap) => {
   const d = snap.val();
   if(d){
-    // Merge incoming data into state
     state = {...state, ...d};
-    // Ensure arrays exist
     if(!state.tables) state.tables = {};
     if(!state.servers) state.servers = [];
     if(!state.roster) state.roster = [];
@@ -413,14 +411,12 @@ onValue(dbRef, (snap) => {
     document.getElementById('syncDot').classList.remove('offline');
     isFirstLoad = false;
   } else if (isFirstLoad) {
-    // If database is totally empty on first ever load, initialize it
     save();
     isFirstLoad = false;
   }
 }, { cancelCallback: () => document.getElementById('syncDot').classList.add('offline') });
 
 function save(){ 
-  // Safety: never save if state was somehow wiped
   if(!state.roster && !isFirstLoad) return; 
   set(dbRef, state); 
 }
