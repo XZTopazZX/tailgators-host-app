@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'tg-v15';
+const CACHE_VERSION = 'tg-v16';
 
 self.addEventListener('install', event => {
   self.skipWaiting();
