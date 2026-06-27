@@ -69,27 +69,27 @@ button,input,select,textarea{font:inherit;}
 .table:active{transform:scale(.93);}
 
 /* Table sizes */
-.sixTop{width:9%;height:8.5%;}
-.small{width:7%;height:7.5%;}
-.rightSmall{width:6.5%;height:7%;}
-.barSeat{width:6.5%;height:7%;}
+.sixTop{width:9.5%;height:10.5%;}
+.small{width:7.5%;height:9.5%;}
+.rightSmall{width:7%;height:9%;}
+.barSeat{width:7%;height:9%;}
 
 /* Layout */
 .leftCol{left:1%;}
 .midCol{left:12%;}
-.r1{top:2%}.r2{top:12%}.r3{top:22%}.r4{top:32%}
-.r5{top:44%}.r6{top:54%}.r7{top:64%}.r8{top:74%}.r9{top:84%}
+.r1{top:2%}.r2{top:13%}.r3{top:24%}.r4{top:35%}
+.r5{top:47%}.r6{top:58%}.r7{top:69%}.r8{top:80%}.r9{top:91%}
 .top20{top:2%;left:12%;}
 .t30{top:2%;left:30%;}
 .t50{top:2%;left:58%;}
 .t60{top:2%;left:71%;}
 .t70{top:2%;left:82%;}
 .rcol1{left:71%}.rcol2{left:82%;}
-.rr2{top:12%}.rr3{top:22%}.rr4{top:32%}
-.rr5{top:42%}.rr6{top:52%}.rr7{top:62%}.rr8{top:72%}.rr9{top:82%}
-.bL1{top:44%;left:26%}.bL2{top:54%;left:26%}.bL3{top:64%;left:26%}
-.bR1{top:44%;left:62%}.bR2{top:54%;left:62%}.bR3{top:64%;left:62%}
-.aboveBar1{top:32%;left:32%}.aboveBar2{top:32%;left:42%}.aboveBar3{top:32%;left:52%}
+.rr2{top:13%}.rr3{top:24%}.rr4{top:35%}
+.rr5{top:46%}.rr6{top:57%}.rr7{top:68%}.rr8{top:79%}.rr9{top:90%}
+.bL1{top:47%;left:26%}.bL2{top:58%;left:26%}.bL3{top:69%;left:26%}
+.bR1{top:47%;left:62%}.bR2{top:58%;left:62%}.bR3{top:69%;left:62%}
+.aboveBar1{top:35%;left:32%}.aboveBar2{top:35%;left:42%}.aboveBar3{top:35%;left:52%}
 
 /* Legend */
 .legend{position:absolute;bottom:14px;left:14px;display:flex;gap:14px;z-index:4;background:rgba(255,255,255,.88);padding:9px 16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
@@ -216,7 +216,7 @@ input,select,textarea{width:100%;border:1px solid #3d4a63;border-radius:10px;bac
         <div class="legend-item"><div class="legend-dot" style="background:var(--food)"></div>Eating</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--dirty)"></div>Dirty</div>
       </div>
-      <div class="version">v15</div>
+      <div class="version">v16</div>
     </div>
   </section>
 </div>
@@ -289,34 +289,21 @@ input,select,textarea{width:100%;border:1px solid #3d4a63;border-radius:10px;bac
   <div id="rosterPanel" style="display:none">
     <div class="card">
       <h3>Staff Roster</h3>
-      <div style="display:flex;gap:8px">
-        <input id="rosterName" placeholder="Server name">
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <input id="rosterName" placeholder="New staff name">
         <button class="miniBtn orange" id="addRoster" style="width:70px">Add</button>
       </div>
-      <div id="rosterList" style="margin-top:10px"></div>
+      <div id="rosterList"></div>
     </div>
   </div>
 
   <div id="dayPanel" style="display:none">
     <div class="card">
-      <h3>Cover Cap</h3>
-      <div style="display:flex;gap:8px;align-items:center">
-        <input id="capInput" type="number" placeholder="e.g. 25" style="flex:1">
-        <button class="miniBtn orange" id="setCap" style="width:70px">Set</button>
-        <button class="miniBtn red" id="clearCap" style="width:70px">Off</button>
-      </div>
-      <small id="capStatus" style="color:#aeb8ce;display:block;margin-top:6px"></small>
-    </div>
-    <div class="card">
-      <h3>Shift / Day</h3>
-      <button class="miniBtn orange" id="exportShift">Export Shift CSV</button>
-      <button class="miniBtn" id="resetDay" style="margin-top:8px">Export + Reset Day</button>
-      <button class="miniBtn" id="clearNoExport" style="margin-top:8px">Reset (No Export)</button>
-      <small style="color:#aeb8ce;display:block;line-height:1.35;margin-top:10px">Keeps rotation & roster. Clears tables, waitlist, reservations.</small>
-    </div>
-    <div class="card">
-      <h3>Reserve Page</h3>
-      <a href="./reserve.html" target="_blank" style="display:block;text-align:center;padding:10px;background:#374761;border-radius:10px;color:#fff;font-weight:900;text-decoration:none;">Open Guest Reservation Page ↗</a>
+      <h3>Shift Control</h3>
+      <div class="field"><label>Cover Cap</label><div style="display:flex;gap:8px"><input id="capInput" type="number" placeholder="Set limit"><button class="miniBtn orange" id="setCap" style="width:70px">Set</button></div><small id="capStatus" style="display:block;margin-top:4px;color:#aeb8ce"></small><button class="miniBtn" id="clearCap" style="margin-top:6px">Clear Cap</button></div>
+      <button class="miniBtn" onclick="exportCSV()" style="margin-bottom:8px">Export Shift CSV</button>
+      <button class="miniBtn red" onclick="resetDay()">Reset Day</button>
+      <div style="margin-top:14px;padding-top:10px;border-top:1px solid #334057"><a id="reserveLink" href="reserve.html" target="_blank" style="color:var(--toast);font-weight:900;text-decoration:none;font-size:14px">Open Guest Reservation Page →</a></div>
     </div>
   </div>
 </div>
@@ -338,11 +325,11 @@ input,select,textarea{width:100%;border:1px solid #3d4a63;border-radius:10px;bac
   <div class="sheet">
     <h2 id="modalTitle">Table</h2>
     <div class="field"><label>Party Size</label><input id="partySize" type="number" placeholder="How many?"></div>
-    <div class="field"><label>Server</label><select id="serverSelect"></select></div>
-    <div class="field"><label>Notes</label><input id="tableNotes" placeholder="Optional notes"></div>
+    <div class="field"><label>Server</label><select id="serverPick"></select></div>
+    <div class="field"><label>Notes</label><textarea id="notes" rows="2" placeholder="Any special requests?"></textarea></div>
     <div class="actions">
       <button class="cancel" id="closeModal">Cancel</button>
-      <button class="seat" id="seatTable">Seat</button>
+      <button class="seat" id="seatTable">Seat Table</button>
     </div>
   </div>
 </div>
@@ -353,83 +340,86 @@ input,select,textarea{width:100%;border:1px solid #3d4a63;border-radius:10px;bac
   <h3 id="lpTitle">Table</h3>
   <div id="lpInfo"></div>
   <div class="lp-section">
-    <label>Set Status</label>
+    <label>Change Status</label>
     <div class="status-btns" id="statusBtns"></div>
-    <button class="app-btn" id="appOutBtn">🍽 App Out</button>
   </div>
   <div class="lp-section lp-swap">
     <label>Change Server</label>
-    <select id="swapSelect"><option value="">Pick server...</option></select>
+    <select id="swapSelect"></select>
   </div>
+  <button class="app-btn" id="appOutBtn">Appetizer Out</button>
   <button class="lp-close" id="lpClose">Close</button>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script>
-// ===== FIREBASE =====
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
 const firebaseConfig = {
-  apiKey:"AIzaSyDvSiFuIrhvh7vg_iYJHSIJjbG9JiXRkOU",
-  authDomain:"tailgators-west-seating.firebaseapp.com",
-  databaseURL:"https://tailgators-west-seating-default-rtdb.firebaseio.com",
-  projectId:"tailgators-west-seating",
-  storageBucket:"tailgators-west-seating.firebasestorage.app",
-  messagingSenderId:"889514250602",
-  appId:"1:889514250602:web:9db3b6b28bea6af4ba1513"
+  apiKey: "AIzaSyDvSiFuIrhvh7vg_iYJHSIJjbG9JiXRkOU",
+  authDomain: "tailgators-west-seating.firebaseapp.com",
+  projectId: "tailgators-west-seating",
+  storageBucket: "tailgators-west-seating.firebasestorage.app",
+  messagingSenderId: "889514250602",
+  appId: "1:889514250602:web:9db3b6b28bea6af4ba1513"
 };
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const dbRef = db.ref('tailgators');
 
-db.ref('.info/connected').on('value', s => {
-  document.getElementById('syncDot').classList.toggle('offline', !s.val());
-});
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const dbRef = ref(db, 'state');
 
-let state = {tables:{},wait:[],res:[],servers:[],roster:[],rotationIndex:0,shiftLog:[],coverCap:0};
+// State
+let state = {
+  tables: {},
+  servers: [],
+  roster: [],
+  wait: [],
+  res: [],
+  rotationIndex: 0,
+  shiftLog: [],
+  coverCap: 0
+};
 
-dbRef.on('value', snap => {
-  const d = snap.val();
-  if(d){
-    state = d;
-    state.tables = state.tables||{};
-    state.wait = state.wait||[];
-    state.res = state.res||[];
-    state.servers = state.servers||[];
-    state.roster = state.roster||[];
-    state.rotationIndex = state.rotationIndex||0;
-    state.shiftLog = state.shiftLog||[];
-    state.coverCap = state.coverCap||0;
-    updateAll();
-  }
-});
-
-function save(){ dbRef.set(state); }
-
-// ===== TABLE DEFINITIONS =====
+// Config
+const STATUS_CYCLE = ['open','seated','ticket','food','dirty'];
 const tables = [
-  ['10','sixTop leftCol r1'],['11','small leftCol r2'],['12','small leftCol r3'],['13','small leftCol r4'],
-  ['14','small leftCol r5'],['15','small leftCol r6'],['16','small leftCol r7'],['17','small leftCol r8'],['18','small leftCol r9'],
-  ['20','sixTop top20'],['21','sixTop midCol r2'],['22','sixTop midCol r3'],
-  ['23','small midCol r5'],['24','small midCol r6'],['25','small midCol r7'],['26','small midCol r8'],['27','small midCol r9'],
-  ['30','sixTop t30'],['50','sixTop t50'],['60','small t60'],['70','sixTop t70'],
-  ['61','rightSmall rcol1 rr2'],['62','rightSmall rcol1 rr3'],['63','rightSmall rcol1 rr5'],['64','rightSmall rcol1 rr6'],
-  ['65','rightSmall rcol1 rr7'],['66','rightSmall rcol1 rr8'],['67','rightSmall rcol1 rr9'],
-  ['71','rightSmall rcol2 rr2'],['72','rightSmall rcol2 rr3'],['73','rightSmall rcol2 rr4'],['74','rightSmall rcol2 rr5'],
-  ['75','rightSmall rcol2 rr6'],['76','rightSmall rcol2 rr7'],['77','rightSmall rcol2 rr8'],['78','rightSmall rcol2 rr9'],
-  ['31','barSeat bL1'],['32','barSeat bL2'],['33','barSeat bL3'],
-  ['51','barSeat bR1'],['52','barSeat bR2'],['53','barSeat bR3'],
-  ['40','sixTop aboveBar1'],['41','sixTop aboveBar2'],['42','sixTop aboveBar3']
+  [10,'sixTop leftCol r1'],[11,'small leftCol r2'],[12,'small leftCol r3'],[13,'small leftCol r4'],
+  [14,'small leftCol r5'],[15,'small leftCol r6'],[16,'small leftCol r7'],[17,'small leftCol r8'],[18,'small leftCol r9'],
+  [20,'sixTop top20'],[21,'sixTop midCol r2'],[22,'sixTop midCol r3'],[23,'small midCol r5'],[24,'small midCol r6'],
+  [25,'small midCol r7'],[26,'small midCol r8'],[27,'small midCol r9'],
+  [30,'sixTop t30'],[50,'sixTop t50'],[60,'small t60'],[70,'sixTop t70'],
+  [61,'small rcol1 rr2'],[62,'small rcol1 rr3'],[63,'small rcol1 rr4'],[64,'small rcol1 rr5'],[65,'small rcol1 rr6'],[66,'small rcol1 rr7'],[67,'small rcol1 rr8'],
+  [71,'small rcol2 rr2'],[72,'small rcol2 rr3'],[73,'small rcol2 rr4'],[74,'small rcol2 rr5'],[75,'small rcol2 rr6'],[76,'small rcol2 rr7'],[77,'small rcol2 rr8'],[78,'small rcol2 rr9'],
+  [31,'barSeat bL1'],[32,'barSeat bL2'],[33,'barSeat bL3'],
+  [51,'barSeat bR1'],[52,'barSeat bR2'],[53,'barSeat bR3'],
+  [40,'sixTop aboveBar1'],[41,'sixTop aboveBar2'],[42,'sixTop aboveBar3']
 ];
 
-const STATUS_CYCLE = ['open','seated','ticket','food','dirty'];
+// Load
+onValue(dbRef, (snap) => {
+  const d = snap.val();
+  if(d){
+    state = {...state, ...d};
+    if(!state.tables) state.tables = {};
+    if(!state.servers) state.servers = [];
+    if(!state.roster) state.roster = [];
+    if(!state.wait) state.wait = [];
+    if(!state.res) state.res = [];
+    if(!state.shiftLog) state.shiftLog = [];
+    updateAll();
+    document.getElementById('syncDot').classList.remove('offline');
+  }
+}, { cancelCallback: () => document.getElementById('syncDot').classList.add('offline') });
 
-function fmt(ts){ return ts ? new Date(ts).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}) : '—'; }
-function mins(ts){ return ts ? Math.floor((Date.now()-ts)/60000) : 0; }
+function save(){ set(dbRef, state); }
 
-// ===== TABLE CLICK =====
+// Utils
+const fmt = (ts) => ts ? new Date(ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '—';
+const mins = (ts) => ts ? Math.floor((Date.now() - ts)/60000) : 0;
+
 function handleTableClick(n){
-  let t = state.tables[n];
-  if(!t || t.status==='open'){
+  const t = state.tables[n];
+  if(!t){
     openSeatModal(n);
   } else {
     let idx = STATUS_CYCLE.indexOf(t.status);
@@ -439,14 +429,13 @@ function handleTableClick(n){
       delete state.tables[n];
       save();
     } else if(next === 'food'){
-      // Require confirmation before recording ticket time
       pendingConfirmTable = n;
       document.getElementById('confirmTableLabel').textContent = 'Table '+n+' — '+( t.server||'')+(t.party?' ('+t.party+')':'');
       document.getElementById('confirmModal').classList.add('show');
     } else {
-      // Only set ticketIn the FIRST time — never overwrite on bounce
       if(next === 'ticket' && !t.ticketIn){ t.ticketIn = Date.now(); }
       t.status = next;
+      t.statusAt = Date.now();
       logEvent(n, next, t);
       save();
     }
@@ -458,36 +447,34 @@ function logEvent(n, action, t){
     time: new Date().toLocaleString(),
     table: n,
     action: action,
-    server: t ? (t.server||'') : '',
-    party: t ? (t.party||'') : '',
-    ticketTime: (action==='food' && t && t.ticketTime) ? t.ticketTime : null,
-    appTime: (t && t.lastAppTime) ? t.lastAppTime : null
+    server: t.server||'',
+    party: t.party||'',
+    ticketTime: t.ticketTime||null
   });
-  if(state.shiftLog.length > 2000) state.shiftLog = state.shiftLog.slice(-2000);
 }
 
-// ===== SEAT MODAL =====
 function openSeatModal(n){
-  document.getElementById('modalTitle').textContent = 'Table '+n;
-  document.getElementById('partySize').value = '';
-  document.getElementById('tableNotes').value = '';
-  const sel = document.getElementById('serverSelect');
-  sel.innerHTML = '<option value="">Assign server</option>' + state.servers.map(s=>`<option value="${s}">${s}</option>`).join('');
+  document.getElementById('modalTitle').textContent = 'Table ' + n;
+  const sp = document.getElementById('serverPick');
+  sp.innerHTML = state.servers.map(s => `<option value="${s}">${s}</option>`).join('') || '<option value="">No servers in rotation</option>';
   const next = state.servers.length ? state.servers[state.rotationIndex % state.servers.length] : '';
-  sel.value = next;
-  document.getElementById('modal').dataset.table = n;
+  if(next) sp.value = next;
+  document.getElementById('partySize').value = '';
+  document.getElementById('notes').value = '';
   document.getElementById('modal').classList.add('show');
 }
 
 document.getElementById('seatTable').onclick = () => {
-  const n = document.getElementById('modal').dataset.table;
-  const size = document.getElementById('partySize').value;
-  const server = document.getElementById('serverSelect').value;
-  const notes = document.getElementById('tableNotes').value;
-  state.tables[n] = {status:'seated', party:size, server:server, notes:notes, started:Date.now()};
-  logEvent(n,'seated',state.tables[n]);
-  if(server && server === state.servers[state.rotationIndex % state.servers.length]){
-    state.rotationIndex = (state.rotationIndex+1) % state.servers.length;
+  const n = document.getElementById('modalTitle').textContent.replace('Table ','');
+  const s = document.getElementById('serverPick').value;
+  const p = document.getElementById('partySize').value;
+  const notes = document.getElementById('notes').value;
+  if(s && p){
+    state.tables[n] = {server:s,party:p,notes:notes,started:Date.now(),statusAt:Date.now(),status:'seated'};
+    logEvent(n,'seated',state.tables[n]);
+    if(state.servers.length && s === state.servers[state.rotationIndex % state.servers.length]){
+      state.rotationIndex++;
+    }
   }
   document.getElementById('modal').classList.remove('show');
   save();
@@ -503,6 +490,7 @@ document.getElementById('confirmYes').onclick = () => {
   if(t){
     if(t.ticketIn && !t.ticketTime){ t.ticketTime = Math.floor((Date.now()-t.ticketIn)/60000); }
     t.status = 'food';
+    t.statusAt = Date.now();
     logEvent(n,'food',t);
     save();
   }
@@ -516,7 +504,6 @@ document.getElementById('confirmNo').onclick = () => {
 
 // ===== LONG PRESS POPUP =====
 let currentLpTable = null;
-
 function showLp(n){
   currentLpTable = n;
   const t = state.tables[n];
@@ -524,28 +511,41 @@ function showLp(n){
   document.getElementById('lpTitle').textContent = 'Table '+n;
   document.getElementById('lpInfo').innerHTML = `
     <div class="lp-info-row"><span class="lp-label">Server</span><span class="lp-val">${t.server||'—'}</span></div>
-    <div class="lp-info-row"><span class="lp-label">Party</span><span class="lp-val">${t.party||'—'}</span></div>
+    <div class="lp-info-row"><span class="lp-label">Party</span><input type="number" id="lpPartyEdit" value="${t.party||''}" style="width:60px;padding:2px 5px;font-size:14px;border:1px solid #ddd;border-radius:4px;text-align:right"></div>
     <div class="lp-info-row"><span class="lp-label">Sat At</span><span class="lp-val">${fmt(t.started)}</span></div>
     <div class="lp-info-row"><span class="lp-label">Total Time</span><span class="lp-val">${mins(t.started)}m</span></div>
-    ${t.ticketIn ? `<div class="lp-info-row"><span class="lp-label">Ticket In</span><span class="lp-val">${fmt(t.ticketIn)}</span></div>` : ''}
+    <div class="lp-info-row"><span class="lp-label">Ticket In</span><input type="time" id="lpTicketEdit" value="${t.ticketIn?new Date(t.ticketIn).toTimeString().slice(0,5):''}" style="width:100px;padding:2px 5px;font-size:14px;border:1px solid #ddd;border-radius:4px;text-align:right"></div>
     ${t.ticketTime ? `<div class="lp-info-row"><span class="lp-label">Ticket Time</span><span class="lp-val">${t.ticketTime}m</span></div>` : ''}
     ${t.appOutTime ? `<div class="lp-info-row"><span class="lp-label">App Out</span><span class="lp-val">${fmt(t.appOutTime)}</span></div>` : ''}
     ${t.notes ? `<div class="lp-info-row"><span class="lp-label">Notes</span><span class="lp-val">${t.notes}</span></div>` : ''}
   `;
-  // Status buttons
   const statuses = [{k:'open',l:'Open'},{k:'seated',l:'Menus'},{k:'ticket',l:'Ticket'},{k:'food',l:'Eating'},{k:'dirty',l:'Dirty'}];
   document.getElementById('statusBtns').innerHTML = statuses.map(s =>
     `<button class="status-btn s-${s.k} ${t.status===s.k?'active':''}" onclick="setStatus('${s.k}')">${s.l}</button>`
   ).join('');
-  // Swap select
   const sw = document.getElementById('swapSelect');
   sw.innerHTML = '<option value="">Pick server...</option>' + state.servers.map(s=>`<option value="${s}">${s}</option>`).join('');
   sw.value = t.server||'';
   document.getElementById('lpPopup').classList.add('show');
   document.getElementById('lpOverlay').classList.add('show');
+
+  document.getElementById('lpPartyEdit').onchange = (e) => {
+    if(currentLpTable && state.tables[currentLpTable]){
+      state.tables[currentLpTable].party = e.target.value;
+      save();
+    }
+  };
+  document.getElementById('lpTicketEdit').onchange = (e) => {
+    if(currentLpTable && state.tables[currentLpTable] && e.target.value){
+      const [h,m] = e.target.value.split(':');
+      const d = new Date(); d.setHours(h); d.setMinutes(m);
+      state.tables[currentLpTable].ticketIn = d.getTime();
+      save();
+    }
+  };
 }
 
-function setStatus(s){
+window.setStatus = (s) => {
   if(!currentLpTable) return;
   let t = state.tables[currentLpTable];
   if(!t) return;
@@ -553,16 +553,15 @@ function setStatus(s){
     logEvent(currentLpTable,'cleared',t);
     delete state.tables[currentLpTable];
   } else {
-    // Only set ticketIn the FIRST time — never overwrite it on status bounce
     if(s === 'ticket' && !t.ticketIn) t.ticketIn = Date.now();
-    // Only record ticketTime the FIRST time food is reached — never overwrite
     if(s === 'food' && t.ticketIn && !t.ticketTime) t.ticketTime = Math.floor((Date.now()-t.ticketIn)/60000);
     t.status = s;
+    t.statusAt = Date.now();
     logEvent(currentLpTable, s, t);
   }
   closeLp();
   save();
-}
+};
 
 document.getElementById('swapSelect').onchange = (e) => {
   if(!currentLpTable || !e.target.value) return;
@@ -579,10 +578,9 @@ document.getElementById('appOutBtn').onclick = () => {
   if(!t.appOutTime){
     t.appOutTime = now;
   } else {
-    // Second tap = app delivered, record time
     t.appTicketTime = Math.floor((now - t.appOutTime)/60000);
     state.shiftLog.push({time:new Date().toLocaleString(), table:currentLpTable, action:'app_delivered', server:t.server||'', party:t.party||'', appTicketTime:t.appTicketTime});
-    t.appOutTime = null; // reset for next round
+    t.appOutTime = null;
   }
   save();
   closeLp();
@@ -596,7 +594,7 @@ function closeLp(){
 document.getElementById('lpOverlay').onclick = closeLp;
 document.getElementById('lpClose').onclick = closeLp;
 
-// ===== DRAW TABLES (once) =====
+// ===== DRAW TABLES =====
 function drawTables(){
   const floor = document.getElementById('floor');
   tables.forEach(([n,cls]) => {
@@ -605,9 +603,7 @@ function drawTables(){
     d.dataset.table = n;
     d.innerHTML = `<div class="num">${n}</div><div class="srv"></div><div class="badges"><span class="tb"></span><span class="pb"></span></div>`;
 
-    // Long press = popup, tap = cycle
     let holdTimer = null, holdFired = false, startX = 0, startY = 0;
-
     const startHold = (x, y) => {
       holdFired = false;
       startX = x; startY = y;
@@ -633,7 +629,6 @@ function drawTables(){
       e.preventDefault();
       const t0 = e.touches[0];
       startHold(t0.clientX, t0.clientY);
-      // Visual feedback after 300ms
       setTimeout(() => { if(holdTimer) d.style.filter = 'brightness(0.75)'; }, 300);
     }, { passive: false });
 
@@ -648,7 +643,6 @@ function drawTables(){
     d.addEventListener('touchcancel', () => cancelHold());
     d.addEventListener('contextmenu', e => e.preventDefault());
 
-    // Mouse fallback for desktop
     d.addEventListener('mousedown', e => { if(e.button===0) startHold(e.clientX, e.clientY); });
     d.addEventListener('mouseup', () => endHold());
     d.addEventListener('mouseleave', () => cancelHold());
@@ -658,7 +652,6 @@ function drawTables(){
 
 // ===== RENDER =====
 function updateAll(){
-  // Render tables
   let covers=0, seated=0;
   document.querySelectorAll('.table').forEach(el => {
     const n = el.dataset.table;
@@ -667,12 +660,11 @@ function updateAll(){
     if(t.status && t.status!=='open'){
       el.classList.add(t.status);
       el.querySelector('.srv').textContent = t.server||'';
-      // Show minutes in current stage (bottom-left) and party size (bottom-right)
-      const stageStart = t.status==='ticket' ? (t.ticketIn||t.started) : t.started;
+      const stageStart = t.statusAt || t.started;
       el.querySelector('.tb').textContent = mins(stageStart)+'m';
       el.querySelector('.pb').textContent = t.party||'';
       if(t.status==='seated'||t.status==='ticket'||t.status==='food') seated++;
-      if(t.status==='seated') covers += parseInt(t.party)||0;
+      if(t.status==='seated'||t.status==='ticket') covers += parseInt(t.party)||0;
       if(t.status==='dirty' && mins(t.started)>10) el.classList.add('pulse');
     } else {
       el.querySelector('.srv').textContent='';
@@ -681,7 +673,6 @@ function updateAll(){
     }
   });
 
-  // Stats
   document.getElementById('openCount').textContent = tables.length - Object.keys(state.tables).length;
   document.getElementById('seatedCount').textContent = seated;
   document.getElementById('coversCount').textContent = covers;
@@ -689,27 +680,20 @@ function updateAll(){
   const next = state.servers.length ? state.servers[state.rotationIndex % state.servers.length] : '—';
   document.getElementById('nextServerTop').textContent = next;
   document.getElementById('nextServerCard').textContent = next;
+  document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString([], {weekday:'short',month:'short',day:'numeric'});
 
-  // Cover cap
   const cap = state.coverCap||0;
   const banner = document.getElementById('capBanner');
   const coversStat = document.getElementById('coversStat');
   if(cap > 0){
-    document.getElementById('capStatus').textContent = `Cap: ${cap} covers. Currently: ${covers}.`;
-    if(covers >= cap){
-      banner.classList.add('show');
-      coversStat.classList.add('cap-alert');
-    } else {
-      banner.classList.remove('show');
-      coversStat.classList.remove('cap-alert');
-    }
+    document.getElementById('capStatus').textContent = `Cap: ${cap}. Current: ${covers}.`;
+    if(covers >= cap){ banner.classList.add('show'); coversStat.classList.add('cap-alert'); }
+    else { banner.classList.remove('show'); coversStat.classList.remove('cap-alert'); }
   } else {
-    banner.classList.remove('show');
-    coversStat.classList.remove('cap-alert');
+    banner.classList.remove('show'); coversStat.classList.remove('cap-alert');
     document.getElementById('capStatus').textContent = 'No cap set.';
   }
 
-  // Server load
   const loadMap = {};
   state.servers.forEach(s => loadMap[s] = {tables:0, covers:0});
   Object.values(state.tables).forEach(t => {
@@ -721,77 +705,46 @@ function updateAll(){
   });
   const maxCovers = Math.max(1, ...Object.values(loadMap).map(v=>v.covers));
   document.getElementById('loadBody').innerHTML = Object.entries(loadMap).map(([name,v]) =>
-    `<tr>
-      <td><b>${name}</b><div class="load-bar" style="width:${Math.round(v.covers/maxCovers*100)}%"></div></td>
-      <td>${v.tables}</td>
-      <td>${v.covers}</td>
-    </tr>`
-  ).join('') || '<tr><td colspan="3" style="color:#aeb8ce;font-size:12px">No servers on rotation.</td></tr>';
+    `<tr><td><b>${name}</b><div class="load-bar" style="width:${Math.round(v.covers/maxCovers*100)}%"></div></td><td>${v.tables}</td><td>${v.covers}</td></tr>`
+  ).join('') || '<tr><td colspan="3">No servers.</td></tr>';
 
-  // Rotation list
   document.getElementById('serverList').innerHTML = state.servers.map((s,i) => {
     const isNext = i === state.rotationIndex % state.servers.length;
-    return `<div class="guest" style="${isNext?'border:2px solid var(--toast)':''}">
-      <div><b>${s}</b><small>${isNext?'Next Up':'In Rotation'}</small></div>
-      <div style="display:flex;gap:6px">
-        <button onclick="state.rotationIndex=${i};save()" style="border:0;border-radius:8px;background:var(--toast);color:#fff;padding:6px 9px;font-weight:800;cursor:pointer;font-size:12px">Next</button>
-        <button onclick="state.servers.splice(${i},1);save()" style="border:0;border-radius:8px;background:#374761;color:#fff;padding:6px 9px;font-weight:800;cursor:pointer">✕</button>
-      </div>
-    </div>`;
-  }).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No servers on rotation.</div>';
+    return `<div class="guest" style="${isNext?'border:2px solid var(--toast)':''}"><div><b>${s}</b><small>${isNext?'Next Up':'In Rotation'}</small></div><div style="display:flex;gap:6px"><button onclick="window.setNext(${i})" style="border:0;border-radius:8px;background:var(--toast);color:#fff;padding:6px 9px;font-weight:800;cursor:pointer;font-size:12px">Next</button><button onclick="window.removeServer(${i})" style="border:0;border-radius:8px;background:#374761;color:#fff;padding:6px 9px;font-weight:800;cursor:pointer">✕</button></div></div>`;
+  }).join('');
 
-  // Roster
   document.getElementById('rosterList').innerHTML = state.roster.map((s,i) =>
-    `<div class="rosterItem"><span>${s}</span><button onclick="state.roster.splice(${i},1);save()">Remove</button></div>`
-  ).join('') || '<div style="color:#aeb8ce;font-size:12px">No staff added yet.</div>';
+    `<div class="rosterItem"><span>${s}</span><button onclick="window.removeRoster(${i})">Remove</button></div>`
+  ).join('');
+  document.getElementById('rosterPick').innerHTML = '<option value="">Pick from roster</option>' + state.roster.filter(r=>!state.servers.includes(r)).map(r=>`<option value="${r}">${r}</option>`).join('');
 
-  const rp = document.getElementById('rosterPick');
-  rp.innerHTML = '<option value="">Pick from roster</option>' + state.roster.filter(r=>!state.servers.includes(r)).map(r=>`<option value="${r}">${r}</option>`).join('');
-
-  // Waitlist
   document.getElementById('waitList').innerHTML = state.wait.map((w,i) =>
-    `<div class="guest"><div><b>${w.name} (${w.size||'?'})</b><small>${mins(w.created)}m${w.notes?' · '+w.notes:''}</small></div><button onclick="state.wait.splice(${i},1);save()">Seat</button></div>`
-  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No one waiting.</div>';
-
-  // Reservations
+    `<div class="guest"><div><b>${w.name} (${w.size||'?'})</b><small>${mins(w.created)}m${w.notes?' · '+w.notes:''}</small></div><button onclick="window.seatWait(${i})">Seat</button></div>`
+  ).join('');
   document.getElementById('resList').innerHTML = state.res.map((r,i) =>
-    `<div class="guest"><div><b>${r.time||'?'} · ${r.name} (${r.size||'?'})</b><small>${r.notes||''}</small></div><button onclick="state.res.splice(${i},1);save()">Done</button></div>`
-  ).join('') || '<div style="color:#aeb8ce;font-size:12px;padding:6px">No reservations.</div>';
+    `<div class="guest"><div><b>${r.time||'?'} · ${r.name} (${r.size||'?'})</b><small>${r.notes||''}</small></div><button onclick="window.doneRes(${i})">Done</button></div>`
+  ).join('');
 }
 
-// ===== CONTROLS =====
-document.getElementById('addServerFromRoster').onclick = () => {
-  const s = document.getElementById('rosterPick').value;
-  if(s){ state.servers.push(s); save(); }
-};
-document.getElementById('addRoster').onclick = () => {
-  const s = document.getElementById('rosterName').value.trim();
-  if(s){ state.roster.push(s); document.getElementById('rosterName').value=''; save(); }
-};
-document.getElementById('addWait').onclick = () => {
-  const n = document.getElementById('wName').value.trim();
-  if(n){ state.wait.push({name:n,size:document.getElementById('wSize').value,notes:document.getElementById('wNotes').value,created:Date.now()}); save(); }
-};
-document.getElementById('addRes').onclick = () => {
-  const n = document.getElementById('rName').value.trim();
-  if(n){ state.res.push({name:n,time:document.getElementById('rTime').value,size:document.getElementById('rSize').value,notes:document.getElementById('rNotes').value}); save(); }
-};
+window.setNext = (i) => { state.rotationIndex = i; save(); };
+window.removeServer = (i) => { state.servers.splice(i,1); save(); };
+window.removeRoster = (i) => { state.roster.splice(i,1); save(); };
+window.seatWait = (i) => { state.wait.splice(i,1); save(); };
+window.doneRes = (i) => { state.res.splice(i,1); save(); };
+
+document.getElementById('addServerFromRoster').onclick = () => { const s = document.getElementById('rosterPick').value; if(s){ state.servers.push(s); save(); } };
+document.getElementById('addRoster').onclick = () => { const s = document.getElementById('rosterName').value.trim(); if(s){ state.roster.push(s); document.getElementById('rosterName').value=''; save(); } };
+document.getElementById('addWait').onclick = () => { const n = document.getElementById('wName').value.trim(); if(n){ state.wait.push({name:n,size:document.getElementById('wSize').value,notes:document.getElementById('wNotes').value,created:Date.now()}); save(); } };
+document.getElementById('addRes').onclick = () => { const n = document.getElementById('rName').value.trim(); if(n){ state.res.push({name:n,time:document.getElementById('rTime').value,size:document.getElementById('rSize').value,notes:document.getElementById('rNotes').value}); save(); } };
 document.getElementById('skipServer').onclick = () => { if(state.servers.length){ state.rotationIndex=(state.rotationIndex+1)%state.servers.length; save(); } };
 document.getElementById('resetRotation').onclick = () => { state.rotationIndex=0; save(); };
-
-// Cover cap
-document.getElementById('setCap').onclick = () => {
-  const v = parseInt(document.getElementById('capInput').value);
-  if(v>0){ state.coverCap=v; save(); }
-};
+document.getElementById('setCap').onclick = () => { const v = parseInt(document.getElementById('capInput').value); if(v>0){ state.coverCap=v; save(); } };
 document.getElementById('clearCap').onclick = () => { state.coverCap=0; save(); };
 
-// Panel
 document.getElementById('togglePanel').onclick = () => { document.getElementById('panel').classList.add('open'); document.getElementById('panelOverlay').classList.add('show'); };
 document.getElementById('panelClose').onclick = () => { document.getElementById('panel').classList.remove('open'); document.getElementById('panelOverlay').classList.remove('show'); };
 document.getElementById('panelOverlay').onclick = () => { document.getElementById('panel').classList.remove('open'); document.getElementById('panelOverlay').classList.remove('show'); };
 
-// Tabs
 document.querySelectorAll('.tab').forEach(t => {
   t.onclick = () => {
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
@@ -801,59 +754,23 @@ document.querySelectorAll('.tab').forEach(t => {
   };
 });
 
-// Export CSV
-function buildCSV(){
+window.exportCSV = () => {
   const rows = [['Time','Table','Action','Server','Party','Dinner Ticket (min)','App Ticket (min)']];
-  (state.shiftLog||[]).forEach(e => {
-    rows.push([e.time,e.table,e.action,e.server,e.party,e.ticketTime||'',e.appTicketTime||'']);
-  });
-  // Summary stats
-  const dinnerTimes = (state.shiftLog||[]).filter(e=>e.ticketTime).map(e=>e.ticketTime);
-  const appTimes = (state.shiftLog||[]).filter(e=>e.appTicketTime).map(e=>e.appTicketTime);
-  rows.push([]);
-  rows.push(['--- DINNER TICKET STATS ---']);
-  if(dinnerTimes.length){
-    rows.push(['Count',dinnerTimes.length]);
-    rows.push(['Average',Math.round(dinnerTimes.reduce((a,b)=>a+b,0)/dinnerTimes.length)+'m']);
-    rows.push(['Best',Math.min(...dinnerTimes)+'m']);
-    rows.push(['Worst',Math.max(...dinnerTimes)+'m']);
-  } else { rows.push(['No dinner ticket data']); }
-  rows.push([]);
-  rows.push(['--- APP TICKET STATS ---']);
-  if(appTimes.length){
-    rows.push(['Count',appTimes.length]);
-    rows.push(['Average',Math.round(appTimes.reduce((a,b)=>a+b,0)/appTimes.length)+'m']);
-    rows.push(['Best',Math.min(...appTimes)+'m']);
-    rows.push(['Worst',Math.max(...appTimes)+'m']);
-  } else { rows.push(['No app ticket data']); }
-  return rows.map(r=>r.join(',')).join('\n');
-}
-
-function doExport(){
-  const csv = buildCSV();
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download = 'shift_'+new Date().toLocaleDateString().replace(/\//g,'-')+'.csv';
-  a.click();
-}
-
-document.getElementById('exportShift').onclick = doExport;
-document.getElementById('resetDay').onclick = () => {
-  doExport();
-  state.tables={}; state.wait=[]; state.res=[]; state.shiftLog=[]; state.coverCap=0;
-  save();
-};
-document.getElementById('clearNoExport').onclick = () => {
-  state.tables={}; state.wait=[]; state.res=[]; state.shiftLog=[]; state.coverCap=0;
-  save();
+  (state.shiftLog||[]).forEach(e => rows.push([e.time,e.table,e.action,e.server,e.party,e.ticketTime||'',e.appTicketTime||'']));
+  const csv = rows.map(r => r.join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `tailgators-shift-${new Date().toLocaleDateString()}.csv`; a.click();
 };
 
-// Date display
-document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+window.resetDay = () => {
+  if(confirm('Reset all tables and logs? Export CSV first!')){
+    state.tables = {}; state.wait = []; state.res = []; state.shiftLog = []; state.rotationIndex = 0; save();
+  }
+};
 
-// Init
 drawTables();
-setInterval(updateAll, 10000);
+setInterval(updateAll, 30000);
 </script>
 </body>
 </html>
