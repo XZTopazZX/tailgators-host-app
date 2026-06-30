@@ -216,7 +216,7 @@ input,select,textarea{width:100%;border:1px solid #3d4a63;border-radius:10px;bac
         <div class="legend-item"><div class="legend-dot" style="background:var(--food)"></div>Eating</div>
         <div class="legend-item"><div class="legend-dot" style="background:var(--dirty)"></div>Dirty</div>
       </div>
-      <div class="version">v19</div>
+      <div class="version">v20</div>
     </div>
   </section>
 </div>
@@ -672,7 +672,7 @@ function updateAll(){
       el.querySelector('.tb').textContent = mins(stageStart)+'m';
       el.querySelector('.pb').textContent = t.party||'';
       if(t.status==='seated'||t.status==='ticket'||t.status==='food') seated++;
-      if(t.status==='seated'||t.status==='ticket') covers += parseInt(t.party)||0;
+      if(t.status==='seated') covers += parseInt(t.party)||0;
       if(t.status==='dirty' && mins(t.started)>10) el.classList.add('pulse');
     } else {
       el.querySelector('.srv').textContent='';
